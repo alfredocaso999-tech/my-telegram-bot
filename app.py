@@ -19,7 +19,7 @@ PRODOTTI = {
         "nome": "dry m.f.l",
         "prezzo": "29.99 €",
         "descrizione": "Impara Python da zero. 10 ore di video, esercizi e progetti. Adatto per principianti assoluti.",
-        "video": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
+        "video": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4?fl_attachment=0"
     },
     "2": {
         "nome": "📹 Corso Video Editing",
@@ -129,9 +129,6 @@ def gestisci_click(call):
 📝 *Descrizione dettagliata:*
 {prodotto['descrizione']}
 
-🎬 *Video anteprima:*
-{prodotto['video']}
-
 ✨ *Cosa include:*
 • Accesso immediato
 • Materiali scaricabili
@@ -196,18 +193,26 @@ def gestisci_click(call):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        bot.send_message(
-            call.message.chat.id,
-            f"🎬 *Anteprima del corso*\n\n"
-            f"📹 *{prodotto['nome']}*\n\n"
-            f"Guarda l'anteprima qui:\n{prodotto['video']}\n\n"
-            f"💡 *Il corso completo include:*\n"
-            f"{prodotto['descrizione']}\n\n"
-            f"💰 Prezzo: {prodotto['prezzo']}\n"
-            f"Usa /negozio per tornare allo shop!",
-            parse_mode="Markdown"
-        )
-        bot.answer_callback_query(call.id, "🎬 Video anteprima inviato!")
+        try:
+            # Invia il video direttamente (si apre in Telegram!)
+            bot.send_video(
+                call.message.chat.id,
+                prodotto['video'],
+                caption=f"🎬 *{prodotto['nome']}*\n\n{prodotto['descrizione']}",
+                parse_mode="Markdown",
+                supports_streaming=True
+            )
+            bot.answer_callback_query(call.id, "🎬 Video in riproduzione!")
+        except Exception as e:
+            # Se non funziona, manda il link come testo
+            bot.send_message(
+                call.message.chat.id,
+                f"🎬 *{prodotto['nome']}*\n\n"
+                f"Video non riproducibile direttamente. Apri il link:\n{prodotto['video']}\n\n"
+                f"📝 *Descrizione:*\n{prodotto['descrizione']}",
+                parse_mode="Markdown"
+            )
+            bot.answer_callback_query(call.id, "⚠️ Video inviato come link")
     
     # CASO 4: L'utente ha cliccato "Acquista"
     elif call.data.startswith("acquista_"):
@@ -230,9 +235,6 @@ def gestisci_click(call):
             f"_Una volta confermato il pagamento, riceverai l'accesso immediato!_ 🚀",
             parse_mode="Markdown"
         )
-        
-        # Invia anche un messaggio privato all'amministratore (opzionale)
-        # bot.send_message(ADMIN_ID, f"🛒 Nuovo ordine: {prodotto['nome']} da {call.from_user.username}")
         
         bot.answer_callback_query(call.id, "🛒 Prodotto aggiunto! Controlla i messaggi per completare l'ordine")
 
