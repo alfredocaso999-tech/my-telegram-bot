@@ -1,6 +1,7 @@
 import telebot
 import os
 import random
+import requests
 from datetime import datetime
 import threading
 from flask import Flask
@@ -19,27 +20,44 @@ PRODOTTI = {
         "nome": "dry m.f.l",
         "prezzo": "29.99 €",
         "descrizione": "Impara Python da zero. 10 ore di video, esercizi e progetti. Adatto per principianti assoluti.",
-        "video": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4?fl_attachment=0"
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
     },
     "2": {
         "nome": "📹 Corso Video Editing",
         "prezzo": "49.99 €",
         "descrizione": "Diventa un professionista del video editing con Premiere Pro. 15 ore di contenuti pratici.",
-        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     "3": {
         "nome": "🎨 Corso Graphic Design",
         "prezzo": "39.99 €",
         "descrizione": "Impara Photoshop e Illustrator. 12 ore di tutorial pratici con progetti reali.",
-        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     "4": {
         "nome": "🤖 Corso Telegram Bot",
         "prezzo": "34.99 €",
         "descrizione": "Crea bot Telegram professionali. 8 ore di coding pratico e deployment su cloud.",
-        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }
 }
+
+# ==================== FUNZIONE PER SCARICARE VIDEO ====================
+def scarica_video(url, filename="temp_video.mp4"):
+    """Scarica un video da un URL e lo salva localmente"""
+    try:
+        response = requests.get(url, timeout=30, stream=True)
+        if response.status_code == 200:
+            with open(filename, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            return filename
+        else:
+            print(f"Errore download: status {response.status_code}")
+            return None
+    except Exception as e:
+        print(f"Errore durante il download: {e}")
+        return None
 
 # ==================== COMANDI BASE ====================
 @bot.message_handler(commands=['start'])
@@ -188,31 +206,52 @@ def gestisci_click(call):
         )
         bot.answer_callback_query(call.id)
     
-    # CASO 3: L'utente vuole vedere il video
+    # CASO 3: L'utente vuole vedere il video (NUOVA VERSIONE CON DOWNLOAD)
     elif call.data.startswith("video_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
+        # Avvisa l'utente che il video sta per arrivare
+        bot.send_message(call.message.chat.id, "🎬 Sto preparando il video... un attimo di pazienza!")
+        
         try:
-            # Invia il video direttamente (si apre in Telegram!)
-            bot.send_video(
-                call.message.chat.id,
-                prodotto['video'],
-                caption=f"🎬 *{prodotto['nome']}*\n\n{prodotto['descrizione']}",
-                parse_mode="Markdown",
-                supports_streaming=True
-            )
-            bot.answer_callback_query(call.id, "🎬 Video in riproduzione!")
+            # Scarica il video da Cloudinary
+            video_path = scarica_video(prodotto['video_url'])
+            
+            if video_path:
+                # Invia il video scaricato
+                with open(video_path, 'rb') as video_file:
+                    bot.send_video(
+                        call.message.chat.id,
+                        video_file,
+                        caption=f"🎬 *{prodotto['nome']}*\n\n{prodotto['descrizione']}",
+                        parse_mode="Markdown",
+                        supports_streaming=True,
+                        timeout=60  # Timeout più lungo per video grandi
+                    )
+                # Pulisci il file temporaneo
+                os.remove(video_path)
+            else:
+                # Fallback: manda solo il link
+                bot.send_message(
+                    call.message.chat.id,
+                    f"🎬 *{prodotto['nome']}*\n\n"
+                    f"Non è stato possibile caricare il video automaticamente.\n"
+                    f"Guarda l'anteprima qui:\n{prodotto['video_url']}",
+                    parse_mode="Markdown"
+                )
+            
+            bot.answer_callback_query(call.id, "🎬 Video inviato!")
+            
         except Exception as e:
-            # Se non funziona, manda il link come testo
+            print(f"Errore: {e}")
             bot.send_message(
                 call.message.chat.id,
-                f"🎬 *{prodotto['nome']}*\n\n"
-                f"Video non riproducibile direttamente. Apri il link:\n{prodotto['video']}\n\n"
-                f"📝 *Descrizione:*\n{prodotto['descrizione']}",
+                f"❌ Errore durante il caricamento del video.\n"
+                f"Puoi guardarlo qui:\n{prodotto['video_url']}",
                 parse_mode="Markdown"
             )
-            bot.answer_callback_query(call.id, "⚠️ Video inviato come link")
+            bot.answer_callback_query(call.id, "⚠️ Errore nel video")
     
     # CASO 4: L'utente ha cliccato "Acquista"
     elif call.data.startswith("acquista_"):
