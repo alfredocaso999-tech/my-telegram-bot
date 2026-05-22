@@ -113,7 +113,7 @@ def negozio(message):
     
     bot.send_message(
         message.chat.id,
-        "🛍️ *✨ BENVENUTA FAMILY ✨*\n\n"
+        "🛍️ *✨ BENVENUTA FAMILY ✨*\n\nScegli un prodotto:",
         parse_mode="Markdown",
         reply_markup=markup
     )
@@ -171,15 +171,7 @@ def gestisci_click(call):
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
-            text="🛍️ *✨ BENVENUTO NEL MIO SHOP ✨*\n\n"
-                 "📚 *Corsi disponibili:*\n"
-                 "Scegli un prodotto cliccando sul bottone qui sotto 👇\n\n"
-                 "_Ogni corso include:_\n"
-                 "✅ Video lezioni HD\n"
-                 "✅ Esercizi pratici\n"
-                 "✅ Certificato di completamento\n"
-                 "✅ Supporto 24/7\n\n"
-                 "💬 *Pagamento:* Contatta @tousername dopo aver scelto",
+            text="🛍️ *✨ BENVENUTA FAMILY ✨*\n\nScegli un prodotto:",
             parse_mode="Markdown",
             reply_markup=markup
         )
