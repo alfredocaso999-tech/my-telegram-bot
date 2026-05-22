@@ -19,6 +19,7 @@ PRODOTTI = {
     "1": {
         "nome": "dry m.f.l",
         "prezzo": "29.99 €",
+        "descrizione": "Impara Python da zero. 10 ore di video, esercizi e progetti. Adatto per principianti assoluti.",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
     },
     "2": {
