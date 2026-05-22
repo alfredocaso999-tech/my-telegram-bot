@@ -16,10 +16,10 @@ bot = telebot.TeleBot(TOKEN)
 # ==================== PRODOTTI DELLA VETRINA ====================
 PRODOTTI = {
     "1": {
-        "nome": "💻 Corso Python Base",
+        "nome": "dry m.f.l",
         "prezzo": "29.99 €",
         "descrizione": "Impara Python da zero. 10 ore di video, esercizi e progetti. Adatto per principianti assoluti.",
-        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "video": "https://drive.google.com/file/d/1TtBZgL8qhBT1PQ_pB5lVweun3qvze-a7/view?usp=drive_link"
     },
     "2": {
         "nome": "📹 Corso Video Editing",
