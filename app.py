@@ -13,34 +13,235 @@ if not TOKEN:
 
 bot = telebot.TeleBot(TOKEN)
 
+# ==================== PRODOTTI DELLA VETRINA ====================
+PRODOTTI = {
+    "1": {
+        "nome": "💻 Corso Python Base",
+        "prezzo": "29.99 €",
+        "descrizione": "Impara Python da zero. 10 ore di video, esercizi e progetti. Adatto per principianti assoluti.",
+        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    "2": {
+        "nome": "📹 Corso Video Editing",
+        "prezzo": "49.99 €",
+        "descrizione": "Diventa un professionista del video editing con Premiere Pro. 15 ore di contenuti pratici.",
+        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    "3": {
+        "nome": "🎨 Corso Graphic Design",
+        "prezzo": "39.99 €",
+        "descrizione": "Impara Photoshop e Illustrator. 12 ore di tutorial pratici con progetti reali.",
+        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    "4": {
+        "nome": "🤖 Corso Telegram Bot",
+        "prezzo": "34.99 €",
+        "descrizione": "Crea bot Telegram professionali. 8 ore di coding pratico e deployment su cloud.",
+        "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    }
+}
+
+# ==================== COMANDI BASE ====================
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, f"✅ Ciao {message.from_user.first_name}! Bot funzionante su Render!")
+    bot.reply_to(message, f"✅ Ciao {message.from_user.first_name}! Benvenuto nel mio shop!\n\n📦 Usa /negozio per vedere i prodotti\n❓ Usa /help per tutti i comandi")
 
 @bot.message_handler(commands=['help'])
 def help_cmd(message):
-    bot.reply_to(message, "Comandi: /start, /help, /time, /echo, /random")
+    testo = """
+🤖 *COMANDI DISPONIBILI*
+
+/start - Messaggio di benvenuto
+/help - Questo messaggio
+/time - Orario attuale
+/echo <testo> - Ripete il tuo messaggio
+/random - Numero casuale (1-100)
+/negozio - Apre la vetrina prodotti
+/shop - Alternativa a /negozio
+
+📦 *Comandi vetrina:*
+- Clicca sui prodotti per vedere i dettagli
+- Usa i bottoni per navigare
+- Contatta @tousername per acquistare
+    """
+    bot.reply_to(message, testo, parse_mode="Markdown")
 
 @bot.message_handler(commands=['time'])
 def time_cmd(message):
-    bot.reply_to(message, datetime.now().strftime("⏰ %H:%M:%S"))
+    bot.reply_to(message, datetime.now().strftime("⏰ %H:%M:%S - %d/%m/%Y"))
 
 @bot.message_handler(commands=['echo'])
 def echo_cmd(message):
     text = message.text.replace('/echo', '').strip()
     if text:
         bot.reply_to(message, f"🔊 {text}")
+    else:
+        bot.reply_to(message, "❓ Cosa vuoi che ripeta? Usa: /echo <testo>")
 
 @bot.message_handler(commands=['random'])
 def random_cmd(message):
     num = random.randint(1, 100)
     bot.reply_to(message, f"🎲 Numero casuale: {num}")
 
+# ==================== VETRINA / NEGOZIO ====================
+@bot.message_handler(commands=['negozio', 'shop'])
+def negozio(message):
+    """Mostra la lista dei prodotti disponibili"""
+    
+    markup = telebot.types.InlineKeyboardMarkup(row_width=1)
+    
+    for id_prodotto, prodotto in PRODOTTI.items():
+        bottone = telebot.types.InlineKeyboardButton(
+            text=f"📦 {prodotto['nome']} - {prodotto['prezzo']}",
+            callback_data=f"prod_{id_prodotto}"
+        )
+        markup.add(bottone)
+    
+    bot.send_message(
+        message.chat.id,
+        "🛍️ *✨ BENVENUTO NEL MIO SHOP ✨*\n\n"
+        "📚 *Corsi disponibili:*\n"
+        "Scegli un prodotto cliccando sul bottone qui sotto 👇\n\n"
+        "_Ogni corso include:_\n"
+        "✅ Video lezioni HD\n"
+        "✅ Esercizi pratici\n"
+        "✅ Certificato di completamento\n"
+        "✅ Supporto 24/7\n\n"
+        "💬 *Pagamento:* Contatta @tousername dopo aver scelto",
+        parse_mode="Markdown",
+        reply_markup=markup
+    )
+
+@bot.callback_query_handler(func=lambda call: True)
+def gestisci_click(call):
+    """Gestisce tutti i click sui bottoni inline"""
+    
+    # CASO 1: L'utente ha cliccato su un prodotto
+    if call.data.startswith("prod_"):
+        id_prodotto = call.data.split("_")[1]
+        prodotto = PRODOTTI[id_prodotto]
+        
+        testo = f"""
+*📦 {prodotto['nome']}*
+
+💰 *Prezzo:* {prodotto['prezzo']}
+
+📝 *Descrizione dettagliata:*
+{prodotto['descrizione']}
+
+🎬 *Video anteprima:*
+{prodotto['video']}
+
+✨ *Cosa include:*
+• Accesso immediato
+• Materiali scaricabili
+• Aggiornamenti gratuiti
+• Certificato incluso
+        """
+        
+        markup = telebot.types.InlineKeyboardMarkup(row_width=2)
+        bottone_acquista = telebot.types.InlineKeyboardButton(
+            "✅ ACQUISTA ORA", 
+            callback_data=f"acquista_{id_prodotto}"
+        )
+        bottone_video = telebot.types.InlineKeyboardButton(
+            "🎬 GUARDA VIDEO", 
+            callback_data=f"video_{id_prodotto}"
+        )
+        bottone_indietro = telebot.types.InlineKeyboardButton(
+            "◀️ TORNA AL CATALOGO", 
+            callback_data="catalogo"
+        )
+        markup.add(bottone_acquista, bottone_video)
+        markup.add(bottone_indietro)
+        
+        bot.edit_message_text(
+            chat_id=call.message.chat.id,
+            message_id=call.message.message_id,
+            text=testo,
+            parse_mode="Markdown",
+            reply_markup=markup
+        )
+        bot.answer_callback_query(call.id)
+    
+    # CASO 2: L'utente vuole tornare al catalogo
+    elif call.data == "catalogo":
+        markup = telebot.types.InlineKeyboardMarkup(row_width=1)
+        for id_prodotto, prodotto in PRODOTTI.items():
+            bottone = telebot.types.InlineKeyboardButton(
+                text=f"📦 {prodotto['nome']} - {prodotto['prezzo']}",
+                callback_data=f"prod_{id_prodotto}"
+            )
+            markup.add(bottone)
+        
+        bot.edit_message_text(
+            chat_id=call.message.chat.id,
+            message_id=call.message.message_id,
+            text="🛍️ *✨ BENVENUTO NEL MIO SHOP ✨*\n\n"
+                 "📚 *Corsi disponibili:*\n"
+                 "Scegli un prodotto cliccando sul bottone qui sotto 👇\n\n"
+                 "_Ogni corso include:_\n"
+                 "✅ Video lezioni HD\n"
+                 "✅ Esercizi pratici\n"
+                 "✅ Certificato di completamento\n"
+                 "✅ Supporto 24/7\n\n"
+                 "💬 *Pagamento:* Contatta @tousername dopo aver scelto",
+            parse_mode="Markdown",
+            reply_markup=markup
+        )
+        bot.answer_callback_query(call.id)
+    
+    # CASO 3: L'utente vuole vedere il video
+    elif call.data.startswith("video_"):
+        id_prodotto = call.data.split("_")[1]
+        prodotto = PRODOTTI[id_prodotto]
+        
+        bot.send_message(
+            call.message.chat.id,
+            f"🎬 *Anteprima del corso*\n\n"
+            f"📹 *{prodotto['nome']}*\n\n"
+            f"Guarda l'anteprima qui:\n{prodotto['video']}\n\n"
+            f"💡 *Il corso completo include:*\n"
+            f"{prodotto['descrizione']}\n\n"
+            f"💰 Prezzo: {prodotto['prezzo']}\n"
+            f"Usa /negozio per tornare allo shop!",
+            parse_mode="Markdown"
+        )
+        bot.answer_callback_query(call.id, "🎬 Video anteprima inviato!")
+    
+    # CASO 4: L'utente ha cliccato "Acquista"
+    elif call.data.startswith("acquista_"):
+        id_prodotto = call.data.split("_")[1]
+        prodotto = PRODOTTI[id_prodotto]
+        
+        bot.send_message(
+            call.message.chat.id,
+            f"✅ *ORDINE RICEVUTO!* ✅\n\n"
+            f"📦 *Prodotto:* {prodotto['nome']}\n"
+            f"💰 *Totale:* {prodotto['prezzo']}\n\n"
+            f"📝 *Come procedere:*\n"
+            f"1️⃣ Contatta @tousername\n"
+            f"2️⃣ Invia il codice: *ORD-{id_prodotto}*\n"
+            f"3️⃣ Riceverai le istruzioni per il pagamento\n\n"
+            f"💳 *Metodi di pagamento accettati:*\n"
+            f"• PayPal\n"
+            f"• Bonifico\n"
+            f"• Carta di credito\n\n"
+            f"_Una volta confermato il pagamento, riceverai l'accesso immediato!_ 🚀",
+            parse_mode="Markdown"
+        )
+        
+        # Invia anche un messaggio privato all'amministratore (opzionale)
+        # bot.send_message(ADMIN_ID, f"🛒 Nuovo ordine: {prodotto['nome']} da {call.from_user.username}")
+        
+        bot.answer_callback_query(call.id, "🛒 Prodotto aggiunto! Controlla i messaggi per completare l'ordine")
+
+# ==================== SERVER FLASK PER RENDER ====================
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "🤖 Bot Telegram attivo su Render!"
+    return "🤖 Bot Telegram attivo su Render! Usa /negozio su Telegram per vedere i prodotti!"
 
 @app.route('/health')
 def health():
@@ -48,6 +249,8 @@ def health():
 
 def run_bot():
     print("🤖 Bot avviato su Render!")
+    print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
+    print("💡 Comandi disponibili: /start, /help, /negozio, /shop, /time, /random, /echo")
     bot.infinity_polling()
 
 if __name__ == '__main__':
