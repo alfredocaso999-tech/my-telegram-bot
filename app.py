@@ -140,12 +140,6 @@ def gestisci_click(call):
 
 💰 *Prezzo:* {prodotto['prezzo']}
 
-✨ *Cosa include:*
-• Accesso immediato
-• Materiali scaricabili
-• Aggiornamenti gratuiti
-• Certificato incluso
-        """
         
         markup = telebot.types.InlineKeyboardMarkup(row_width=2)
         bottone_acquista = telebot.types.InlineKeyboardButton(
