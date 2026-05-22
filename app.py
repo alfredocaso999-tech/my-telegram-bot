@@ -113,15 +113,7 @@ def negozio(message):
     
     bot.send_message(
         message.chat.id,
-        "🛍️ *✨ BENVENUTO NEL MIO SHOP ✨*\n\n"
-        "📚 *Corsi disponibili:*\n"
-        "Scegli un prodotto cliccando sul bottone qui sotto 👇\n\n"
-        "_Ogni corso include:_\n"
-        "✅ Video lezioni HD\n"
-        "✅ Esercizi pratici\n"
-        "✅ Certificato di completamento\n"
-        "✅ Supporto 24/7\n\n"
-        "💬 *Pagamento:* Contatta @tousername dopo aver scelto",
+        "🛍️ *✨ BENVENUTA FAMILY ✨*\n\n"
         parse_mode="Markdown",
         reply_markup=markup
     )
