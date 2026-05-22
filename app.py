@@ -14,30 +14,26 @@ if not TOKEN:
 
 bot = telebot.TeleBot(TOKEN)
 
-# ==================== PRODOTTI DELLA VETRINA ====================
+# ==================== PRODOTTI DELLA VETRINA (SENZA DESCRIZIONE) ====================
 PRODOTTI = {
     "1": {
         "nome": "dry m.f.l",
         "prezzo": "29.99 €",
-        "descrizione": "Impara Python da zero. 10 ore di video, esercizi e progetti. Adatto per principianti assoluti.",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
     },
     "2": {
         "nome": "📹 Corso Video Editing",
         "prezzo": "49.99 €",
-        "descrizione": "Diventa un professionista del video editing con Premiere Pro. 15 ore di contenuti pratici.",
         "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     "3": {
         "nome": "🎨 Corso Graphic Design",
         "prezzo": "39.99 €",
-        "descrizione": "Impara Photoshop e Illustrator. 12 ore di tutorial pratici con progetti reali.",
         "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     "4": {
         "nome": "🤖 Corso Telegram Bot",
         "prezzo": "34.99 €",
-        "descrizione": "Crea bot Telegram professionali. 8 ore di coding pratico e deployment su cloud.",
         "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }
 }
@@ -144,9 +140,6 @@ def gestisci_click(call):
 
 💰 *Prezzo:* {prodotto['prezzo']}
 
-📝 *Descrizione dettagliata:*
-{prodotto['descrizione']}
-
 ✨ *Cosa include:*
 • Accesso immediato
 • Materiali scaricabili
@@ -206,38 +199,31 @@ def gestisci_click(call):
         )
         bot.answer_callback_query(call.id)
     
-    # CASO 3: L'utente vuole vedere il video (NUOVA VERSIONE CON DOWNLOAD)
+    # CASO 3: L'utente vuole vedere il video (SOLO NOME E PREZZO)
     elif call.data.startswith("video_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        # Avvisa l'utente che il video sta per arrivare
         bot.send_message(call.message.chat.id, "🎬 Sto preparando il video... un attimo di pazienza!")
         
         try:
-            # Scarica il video da Cloudinary
             video_path = scarica_video(prodotto['video_url'])
             
             if video_path:
-                # Invia il video scaricato
                 with open(video_path, 'rb') as video_file:
                     bot.send_video(
                         call.message.chat.id,
                         video_file,
-                        caption=f"🎬 *{prodotto['nome']}*\n\n{prodotto['descrizione']}",
+                        caption=f"🎬 *{prodotto['nome']}*\n💰 {prodotto['prezzo']}",
                         parse_mode="Markdown",
                         supports_streaming=True,
-                        timeout=60  # Timeout più lungo per video grandi
+                        timeout=60
                     )
-                # Pulisci il file temporaneo
                 os.remove(video_path)
             else:
-                # Fallback: manda solo il link
                 bot.send_message(
                     call.message.chat.id,
-                    f"🎬 *{prodotto['nome']}*\n\n"
-                    f"Non è stato possibile caricare il video automaticamente.\n"
-                    f"Guarda l'anteprima qui:\n{prodotto['video_url']}",
+                    f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\nLink: {prodotto['video_url']}",
                     parse_mode="Markdown"
                 )
             
@@ -247,8 +233,7 @@ def gestisci_click(call):
             print(f"Errore: {e}")
             bot.send_message(
                 call.message.chat.id,
-                f"❌ Errore durante il caricamento del video.\n"
-                f"Puoi guardarlo qui:\n{prodotto['video_url']}",
+                f"❌ Errore video.\nLink: {prodotto['video_url']}",
                 parse_mode="Markdown"
             )
             bot.answer_callback_query(call.id, "⚠️ Errore nel video")
