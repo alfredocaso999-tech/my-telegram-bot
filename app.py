@@ -139,7 +139,7 @@ def gestisci_click(call):
 *📦 {prodotto['nome']}*
 
 💰 *Prezzo:* {prodotto['prezzo']}
-
+        """
         
         markup = telebot.types.InlineKeyboardMarkup(row_width=2)
         bottone_acquista = telebot.types.InlineKeyboardButton(
