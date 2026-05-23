@@ -38,6 +38,9 @@ PRODOTTI = {
     }
 }
 
+# ==================== USERNAME DEL VENDITORE ====================
+USERNAME_VENDITORE = "tousername"  # CAMBIA CON IL TUO USERNAME! Es: "mariorossi"
+
 # ==================== URL DELL'IMMAGINE ====================
 URL_IMMAGINE = "https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png"
 
@@ -112,7 +115,7 @@ def help_cmd(message):
 1️⃣ Clicca su VETRINA
 2️⃣ Scegli un prodotto
 3️⃣ Clicca su CONTATTACI
-4️⃣ Contatta il venditore per completare l'ordine
+4️⃣ Clicca sul link per contattare il venditore
     """
     bot.reply_to(message, testo, parse_mode="Markdown")
 
@@ -267,29 +270,22 @@ def gestisci_click(call):
             )
             bot.answer_callback_query(call.id, "⚠️ Errore nel video")
     
-    # CASO 4: L'utente ha cliccato "Contattaci"
+    # CASO 4: L'utente ha cliccato "Contattaci" - Link diretto alla chat
     elif call.data.startswith("acquista_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        markup = telebot.types.InlineKeyboardMarkup()
-        bottone_contatta = telebot.types.InlineKeyboardButton(
-            "📞 CONTATTA IL VENDITORE",
-            url="https://t.me/tousername"  # CAMBIA CON IL TUO USERNAME!
-        )
-        markup.add(bottone_contatta)
+        # Crea il link diretto per la chat
+        link_chat = f"https://t.me/{USERNAME_VENDITORE}"
         
+        # Invia messaggio con link cliccabile
         bot.send_message(
             call.message.chat.id,
-            f"📞 *CONTATTA IL VENDITORE* 📞\n\n"
-            f"📦 *Prodotto:* {prodotto['nome']}\n"
-            f"💰 *Prezzo:* {prodotto['prezzo']}\n\n"
-            f"🟢 *Clicca sul pulsante qui sotto per contattarci e completare l'ordine!*",
-            parse_mode="Markdown",
-            reply_markup=markup
+            f"📞 *Contatta il venditore per {prodotto['nome']}* 💰 {prodotto['prezzo']}\n\n👉 [CLICCA QUI PER APRIRE LA CHAT]({link_chat})",
+            parse_mode="Markdown"
         )
         
-        bot.answer_callback_query(call.id, "📞 Contatta il venditore per completare l'ordine")
+        bot.answer_callback_query(call.id, "📞 Link chat aperto!")
 
 # ==================== SERVER FLASK PER RENDER ====================
 app = Flask(__name__)
@@ -306,6 +302,7 @@ def run_bot():
     print("🤖 Bot avviato su Render!")
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
     print(f"🖼️ Immagine di benvenuto: {URL_IMMAGINE}")
+    print(f"👤 Username venditore: {USERNAME_VENDITORE}")
     print("🔘 Pulsante VETRINA sotto l'immagine")
     print("💡 Comandi disponibili: /start, /help, /negozio, /shop, /time, /random, /echo")
     bot.infinity_polling()
