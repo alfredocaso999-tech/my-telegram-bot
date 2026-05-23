@@ -149,7 +149,7 @@ def negozio(message):
     
     bot.send_message(
         message.chat.id,
-        "🛍️ *✨ NOSTRI PRODOTTI ✨*\n\nScegli un prodotto per vedere i dettagli:",
+        " *🦍 I NOSTRI PRODOTTI 🦍*\n\nScegli un prodotto per vedere i dettagli:",
         parse_mode="Markdown",
         reply_markup=markup
     )
@@ -214,7 +214,7 @@ def gestisci_click(call):
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
-            text="🛍️ *✨ NOSTRI PRODOTTI ✨*\n\nScegli un prodotto:",
+            text=" *🦍 I NOSTRI PRODOTTI 🦍*\n\nScegli un prodotto:",
             parse_mode="Markdown",
             reply_markup=markup
         )
