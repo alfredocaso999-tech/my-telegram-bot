@@ -283,7 +283,7 @@ def gestisci_click(call):
         # Invia messaggio con link cliccabile
         bot.send_message(
             call.message.chat.id,
-            f"📞 *Contatta il venditore per {prodotto['nome']}* 💰 {prodotto['prezzo']}\n\n👉 [CLICCA QUI PER APRIRE LA CHAT]({link_chat})",
+            f"📞 *Contatta il venditore per {prodotto['nome']}* 💰 {prodotto['prezzo']}\n\n👉 [CLICCA QUI PER APRIRE LA CHAT](https://t.me/)",
             parse_mode="Markdown"
         )
         
