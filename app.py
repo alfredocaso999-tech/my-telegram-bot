@@ -146,7 +146,7 @@ def gestisci_click(call):
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
-            text=f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\nClicca sul pulsante qui sotto per guardare il video:",
+            text=f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}",
             parse_mode="Markdown",
             reply_markup=markup
         )
