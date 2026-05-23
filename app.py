@@ -18,7 +18,7 @@ bot = telebot.TeleBot(TOKEN)
 PRODOTTI = {
     "1": {
         "nome": "🍫DRY M.F.L🍫",
-        "prezzo": "29.99 €",
+        "prezzo": "1g 10€ 5g 40€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
     },
     "2": {
