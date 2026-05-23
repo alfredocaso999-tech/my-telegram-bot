@@ -14,7 +14,7 @@ if not TOKEN:
 
 bot = telebot.TeleBot(TOKEN)
 
-# ==================== PRODOTTI DELLA VETRINA (SENZA DESCRIZIONE) ====================
+# ==================== PRODOTTI DELLA VETRINA ====================
 PRODOTTI = {
     "1": {
         "nome": "dry m.f.l",
@@ -55,17 +55,77 @@ def scarica_video(url, filename="temp_video.mp4"):
         print(f"Errore durante il download: {e}")
         return None
 
-# ==================== COMANDI BASE ====================
+# ==================== MENU PRINCIPALE CON DUE PULSANTI ====================
+def mostra_menu_principale(chat_id, nome_utente):
+    """Mostra il menu principale con i due pulsanti: Vetrina e Contattaci"""
+    markup = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    bottoni = [
+        telebot.types.KeyboardButton("🛍️ VETRINA"),
+        telebot.types.KeyboardButton("📞 CONTATTACI")
+    ]
+    markup.add(*bottoni)
+    
+    bot.send_message(
+        chat_id,
+        f"🎉 *BENVENUTO NEL NEGOZIO FAMILY!* 🎉\n\n"
+        f"Ciao {nome_utente}!\n\n"
+        f"✨ *Cosa desideri fare?*\n\n"
+        f"📦 *🛍️ VETRINA* - Guarda i nostri prodotti\n"
+        f"💬 *📞 CONTATTACI* - Parla con il supporto\n\n"
+        f"Scegli un'opzione premendo il pulsante qui sotto 👇",
+        parse_mode="Markdown",
+        reply_markup=markup
+    )
+
+# ==================== COMANDO START ====================
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, f"✅ Ciao {message.from_user.first_name}! Benvenuto nel mio shop!\n\n📦 Usa /negozio per vedere i prodotti\n❓ Usa /help per tutti i comandi")
+    """Mostra il menu principale all'avvio"""
+    mostra_menu_principale(message.chat.id, message.from_user.first_name)
 
+# ==================== GESTIONE PULSANTI PRINCIPALI ====================
+@bot.message_handler(func=lambda message: message.text == "🛍️ VETRINA")
+def vetrina_pulsante(message):
+    """Apre la vetrina dei prodotti"""
+    negozio(message)
+
+@bot.message_handler(func=lambda message: message.text == "📞 CONTATTACI")
+def contattaci_pulsante(message):
+    """Mostra le informazioni di contatto"""
+    markup = telebot.types.InlineKeyboardMarkup()
+    bottone_contatto = telebot.types.InlineKeyboardButton(
+        "📱 CONTATTA SU TELEGRAM", 
+        url="https://t.me/tousername"
+    )
+    markup.add(bottone_contatto)
+    
+    bot.send_message(
+        message.chat.id,
+        f"📞 *CONTATTACI*\n\n"
+        f"Per assistenza, informazioni o acquisti:\n\n"
+        f"👤 *Supporto:* @tousername\n"
+        f"✉️ *Email:* support@familybot.com\n"
+        f"⏰ *Orari:* 9:00 - 18:00 (Lun-Ven)\n\n"
+        f"💬 *Rispondiamo in pochi minuti!*\n\n"
+        f"Clicca il bottone qui sotto per parlarci direttamente su Telegram 👇",
+        parse_mode="Markdown",
+        reply_markup=markup
+    )
+
+# ==================== GESTIONE ALTRI MESSAGGI ====================
+@bot.message_handler(func=lambda message: True)
+def gestisci_altri_messaggi(message):
+    """Gestisce qualsiasi altro messaggio mostrando il menu principale"""
+    if message.text not in ["🛍️ VETRINA", "📞 CONTATTACI"]:
+        mostra_menu_principale(message.chat.id, message.from_user.first_name)
+
+# ==================== COMANDI BASE ====================
 @bot.message_handler(commands=['help'])
 def help_cmd(message):
     testo = """
 🤖 *COMANDI DISPONIBILI*
 
-/start - Messaggio di benvenuto
+/start - Mostra il menu principale
 /help - Questo messaggio
 /time - Orario attuale
 /echo <testo> - Ripete il tuo messaggio
@@ -76,7 +136,8 @@ def help_cmd(message):
 📦 *Comandi vetrina:*
 - Clicca sui prodotti per vedere i dettagli
 - Usa i bottoni per navigare
-- Contatta @tousername per acquistare
+
+💡 *Usa i pulsanti nella tastiera!*
     """
     bot.reply_to(message, testo, parse_mode="Markdown")
 
@@ -111,9 +172,16 @@ def negozio(message):
         )
         markup.add(bottone)
     
+    # Aggiungi bottone per tornare al menu principale
+    bottone_menu = telebot.types.InlineKeyboardButton(
+        "🏠 MENU PRINCIPALE",
+        callback_data="menu_principale"
+    )
+    markup.add(bottone_menu)
+    
     bot.send_message(
         message.chat.id,
-        "🛍️ *✨ BENVENUTA FAMILY ✨*\n\nScegli un prodotto:",
+        "🛍️ *✨ NOSTRI PRODOTTI ✨*\n\nScegli un prodotto per vedere i dettagli:",
         parse_mode="Markdown",
         reply_markup=markup
     )
@@ -121,6 +189,12 @@ def negozio(message):
 @bot.callback_query_handler(func=lambda call: True)
 def gestisci_click(call):
     """Gestisce tutti i click sui bottoni inline"""
+    
+    # CASO: Torna al menu principale
+    if call.data == "menu_principale":
+        mostra_menu_principale(call.message.chat.id, call.from_user.first_name)
+        bot.answer_callback_query(call.id)
+        return
     
     # CASO 1: L'utente ha cliccato su un prodotto
     if call.data.startswith("prod_"):
@@ -168,16 +242,23 @@ def gestisci_click(call):
             )
             markup.add(bottone)
         
+        # Aggiungi bottone per tornare al menu principale
+        bottone_menu = telebot.types.InlineKeyboardButton(
+            "🏠 MENU PRINCIPALE",
+            callback_data="menu_principale"
+        )
+        markup.add(bottone_menu)
+        
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
-            text="🛍️ *✨ BENVENUTA FAMILY ✨*\n\nScegli un prodotto:",
+            text="🛍️ *✨ NOSTRI PRODOTTI ✨*\n\nScegli un prodotto:",
             parse_mode="Markdown",
             reply_markup=markup
         )
         bot.answer_callback_query(call.id)
     
-    # CASO 3: L'utente vuole vedere il video (SOLO NOME E PREZZO)
+    # CASO 3: L'utente vuole vedere il video
     elif call.data.startswith("video_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
@@ -221,13 +302,20 @@ def gestisci_click(call):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
+        markup = telebot.types.InlineKeyboardMarkup()
+        bottone_contatta = telebot.types.InlineKeyboardButton(
+            "📞 CONTATTA IL VENDITORE",
+            url="https://t.me/tousername"
+        )
+        markup.add(bottone_contatta)
+        
         bot.send_message(
             call.message.chat.id,
             f"✅ *ORDINE RICEVUTO!* ✅\n\n"
             f"📦 *Prodotto:* {prodotto['nome']}\n"
             f"💰 *Totale:* {prodotto['prezzo']}\n\n"
             f"📝 *Come procedere:*\n"
-            f"1️⃣ Contatta @tousername\n"
+            f"1️⃣ Clicca sul pulsante qui sotto\n"
             f"2️⃣ Invia il codice: *ORD-{id_prodotto}*\n"
             f"3️⃣ Riceverai le istruzioni per il pagamento\n\n"
             f"💳 *Metodi di pagamento accettati:*\n"
@@ -235,17 +323,18 @@ def gestisci_click(call):
             f"• Bonifico\n"
             f"• Carta di credito\n\n"
             f"_Una volta confermato il pagamento, riceverai l'accesso immediato!_ 🚀",
-            parse_mode="Markdown"
+            parse_mode="Markdown",
+            reply_markup=markup
         )
         
-        bot.answer_callback_query(call.id, "🛒 Prodotto aggiunto! Controlla i messaggi per completare l'ordine")
+        bot.answer_callback_query(call.id, "🛒 Prodotto aggiunto! Contatta il venditore per completare l'ordine")
 
 # ==================== SERVER FLASK PER RENDER ====================
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "🤖 Bot Telegram attivo su Render! Usa /negozio su Telegram per vedere i prodotti!"
+    return "🤖 Bot Telegram attivo su Render! Apri il bot e vedrai i pulsanti VETRINA e CONTATTACI!"
 
 @app.route('/health')
 def health():
@@ -254,7 +343,8 @@ def health():
 def run_bot():
     print("🤖 Bot avviato su Render!")
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
-    print("💡 Comandi disponibili: /start, /help, /negozio, /shop, /time, /random, /echo")
+    print("🔘 Pulsanti disponibili: VETRINA e CONTATTACI")
+    print("💡 Usa /start per vedere il menu principale")
     bot.infinity_polling()
 
 if __name__ == '__main__':
