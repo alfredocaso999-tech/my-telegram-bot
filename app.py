@@ -66,13 +66,13 @@ def start(message):
     # Crea il pulsante Vetrina
     markup = telebot.types.InlineKeyboardMarkup()
     bottone_vetrina = telebot.types.InlineKeyboardButton(
-        "🛍️ VETRINA", 
+        "🛒 VETRINA", 
         callback_data="apri_vetrina"
     )
     markup.add(bottone_vetrina)
     
     # Testo da visualizzare
-    testo = f" BENVENUTA FAMILY \n\nCiao {message.from_user.first_name}!\n\nClicca sul pulsante qui sotto per vedere i nostri prodotti 👇"
+    testo = f" 🩸BENVENUTA FAMILY🩸"
     
     # Invia immagine con didascalia e pulsante
     try:
