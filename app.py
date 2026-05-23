@@ -55,29 +55,37 @@ def scarica_video(url, filename="temp_video.mp4"):
         print(f"Errore durante il download: {e}")
         return None
 
-# ==================== COMANDO START MODIFICATO ====================
-@bot.message_handler(commands=['start'])
-def start(message):
-    # Crea tastiera personalizzata con pulsante "Avvia Bot"
+# ==================== INTERCETTA QUALSIASI MESSAGGIO (ANCHE SENZA /start) ====================
+@bot.message_handler(func=lambda message: True)
+def gestisci_qualsiasi_messaggio(message):
+    """Gestisce qualsiasi messaggio, mostrando subito il pulsante Avvia Bot se necessario"""
+    
+    # Se l'utente ha già i bottoni del menu, non fare nulla
+    if message.text in ["🛍️ NEGOZIO", "❓ HELP", "⏰ TIME", "🎲 RANDOM"]:
+        return
+    
+    # Se l'utente ha già premuto Avvia Bot, non mostrare di nuovo
+    if message.text == "🚀 AVVIA BOT":
+        avvia_bot(message)
+        return
+    
+    # Per QUALSIASI altro messaggio, mostra il pulsante Avvia Bot
     markup = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
     bottone_avvia = telebot.types.KeyboardButton("🚀 AVVIA BOT")
     markup.add(bottone_avvia)
     
     bot.reply_to(
-        message, 
-        f"✅ Ciao {message.from_user.first_name}! Benvenuto nel mio shop!\n\n"
-        f"🔹 Premi il pulsante 🚀 AVVIA BOT qui sotto per iniziare\n"
-        f"🔹 Oppure usa i comandi classici:\n"
-        f"   /negozio - Vedi i prodotti\n"
-        f"   /help - Tutti i comandi",
+        message,
+        f"👋 Ciao {message.from_user.first_name}!\n\n"
+        f"Premi il pulsante 🚀 AVVIA BOT qui sotto per iniziare a usare il Negozio Family!",
         reply_markup=markup
     )
 
-# ==================== PULSANTE FISSO "AVVIA BOT" ====================
+# ==================== PULSANTE "AVVIA BOT" ====================
 @bot.message_handler(func=lambda message: message.text == "🚀 AVVIA BOT")
 def avvia_bot(message):
-    """Gestisce il pulsante Avvia Bot"""
-    markup = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+    """Gestisce il pulsante Avvia Bot e mostra il menu principale"""
+    markup = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
     bottoni_menu = [
         telebot.types.KeyboardButton("🛍️ NEGOZIO"),
         telebot.types.KeyboardButton("❓ HELP"),
@@ -89,11 +97,12 @@ def avvia_bot(message):
     bot.send_message(
         message.chat.id,
         f"🎉 *BOT AVVIATO!* 🎉\n\n"
-        f"Benvenuto nel Negozio Family!\n\n"
-        f"✨ Cosa vuoi fare ora?\n"
-        f"• Usa i pulsanti qui sotto\n"
-        f"• Scrivi /negozio per i prodotti\n"
-        f"• Scrivi /help per tutti i comandi\n\n"
+        f"Benvenuto nel Negozio Family, {message.from_user.first_name}!\n\n"
+        f"✨ Usa i pulsanti qui sotto:\n"
+        f"• 🛍️ NEGOZIO - Vedi i prodotti\n"
+        f"• ❓ HELP - Tutti i comandi\n"
+        f"• ⏰ TIME - Orario attuale\n"
+        f"• 🎲 RANDOM - Numero casuale\n\n"
         f"📦 *Pronto a fare acquisti?*",
         parse_mode="Markdown",
         reply_markup=markup
@@ -121,12 +130,26 @@ def pulsante_random(message):
     random_cmd(message)
 
 # ==================== COMANDI BASE ====================
+@bot.message_handler(commands=['start'])
+def start(message):
+    """Comando start legacy"""
+    # Mostra comunque il pulsante Avvia Bot
+    markup = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+    bottone_avvia = telebot.types.KeyboardButton("🚀 AVVIA BOT")
+    markup.add(bottone_avvia)
+    
+    bot.reply_to(
+        message,
+        f"✅ Ciao {message.from_user.first_name}!\n\nPremi 🚀 AVVIA BOT per iniziare!",
+        reply_markup=markup
+    )
+
 @bot.message_handler(commands=['help'])
 def help_cmd(message):
     testo = """
 🤖 *COMANDI DISPONIBILI*
 
-/start - Messaggio di benvenuto con pulsante Avvia Bot
+/start - Mostra il pulsante Avvia Bot
 /help - Questo messaggio
 /time - Orario attuale
 /echo <testo> - Ripete il tuo messaggio
@@ -139,7 +162,7 @@ def help_cmd(message):
 - Usa i bottoni per navigare
 - Contatta @tousername per acquistare
 
-💡 *Hai anche bottoni fissi!*
+💡 *Usa i bottoni nella tastiera!*
     """
     bot.reply_to(message, testo, parse_mode="Markdown")
 
@@ -308,7 +331,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "🤖 Bot Telegram attivo su Render! Premi 'Avvia Bot' su Telegram per iniziare!"
+    return "🤖 Bot Telegram attivo su Render!"
 
 @app.route('/health')
 def health():
@@ -317,8 +340,7 @@ def health():
 def run_bot():
     print("🤖 Bot avviato su Render!")
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
-    print("💡 Comandi disponibili: /start, /help, /negozio, /shop, /time, /random, /echo")
-    print("🔘 Pulsante 'Avvia Bot' disponibile nella tastiera!")
+    print("✨ Il bot risponde a QUALSIASI messaggio con il pulsante Avvia Bot!")
     bot.infinity_polling()
 
 if __name__ == '__main__':
