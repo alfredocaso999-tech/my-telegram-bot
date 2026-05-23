@@ -66,7 +66,7 @@ def start(message):
     # Crea il pulsante Vetrina
     markup = telebot.types.InlineKeyboardMarkup()
     bottone_vetrina = telebot.types.InlineKeyboardButton(
-        "🛍️ VETRINA", 
+        "🛒 VETRINA", 
         callback_data="apri_vetrina"
     )
     markup.add(bottone_vetrina)
@@ -149,7 +149,7 @@ def negozio(message):
     
     bot.send_message(
         message.chat.id,
-        " *🦍 I NOSTRI PRODOTTI 🦍*\n\nScegli un prodotto per vedere i dettagli:",
+        " *🦍 I NOSTRI PRODOTTI 🦍*",
         parse_mode="Markdown",
         reply_markup=markup
     )
