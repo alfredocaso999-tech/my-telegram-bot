@@ -155,7 +155,7 @@ def negozio(message):
     
     bot.send_message(
         message.chat.id,
-        "🛍️ *✨ NOSTRI PRODOTTI ✨*\n\nScegli un prodotto per vedere i dettagli:",
+        " *🦍I NOSTRI PRODOTTI🦍",
         parse_mode="Markdown",
         reply_markup=markup
     )
