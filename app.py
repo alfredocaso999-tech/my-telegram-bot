@@ -22,9 +22,9 @@ PRODOTTI = {
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
     },
     "2": {
-        "nome": "📹 Corso Video Editing",
-        "prezzo": "49.99 €",
-        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "nome": "🇨🇦SUPER BOOL🇨🇦",
+        "prezzo": "0.90 10€ 5g 50€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779554533/2_ywim4n.mp4"
     },
     "3": {
         "nome": " Corso Graphic Design",
