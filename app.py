@@ -17,7 +17,7 @@ bot = telebot.TeleBot(TOKEN)
 # ==================== PRODOTTI DELLA VETRINA ====================
 PRODOTTI = {
     "1": {
-        "nome": "dry m.f.l",
+        "nome": "🍫DRY M.F.L🍫",
         "prezzo": "29.99 €",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
     },
@@ -27,12 +27,12 @@ PRODOTTI = {
         "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     "3": {
-        "nome": "🎨 Corso Graphic Design",
+        "nome": " Corso Graphic Design",
         "prezzo": "39.99 €",
         "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     "4": {
-        "nome": "🤖 Corso Telegram Bot",
+        "nome": " Corso Telegram Bot",
         "prezzo": "34.99 €",
         "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }
