@@ -39,8 +39,7 @@ PRODOTTI = {
 }
 
 # ==================== USERNAME DEL VENDITORE ====================
-# 🇮🇹 CAMBIA QUESTO CON IL TUO USERNAME TELEGRAM (senza @)
-# Esempio: se il tuo username è @mario_rossi, scrivi "mario_rossi"
+# Il tuo username Telegram (senza @)
 USERNAME_VENDITORE = "the_true_freedom"
 
 # ==================== URL DELL'IMMAGINE ====================
@@ -277,13 +276,13 @@ def gestisci_click(call):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        # 🔥 LINK CORRETTO - senza "the_true_freedom" 🔥
+        # Crea il link con il tuo username
         link_chat = f"https://t.me/{USERNAME_VENDITORE}"
         
-        # Invia messaggio con link cliccabile
+        # Invia messaggio con link cliccabile (USA link_chat!)
         bot.send_message(
             call.message.chat.id,
-            f"📞 *Contatta il venditore per {prodotto['nome']}* 💰 {prodotto['prezzo']}\n\n👉 [CLICCA QUI PER APRIRE LA CHAT](https://t.me/)",
+            f"📞 *Contatta il venditore per {prodotto['nome']}* 💰 {prodotto['prezzo']}\n\n👉 [CLICCA QUI PER APRIRE LA CHAT]({link_chat})",
             parse_mode="Markdown"
         )
         
@@ -305,6 +304,7 @@ def run_bot():
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
     print(f"🖼️ Immagine di benvenuto: {URL_IMMAGINE}")
     print(f"👤 Username venditore: {USERNAME_VENDITORE}")
+    print(f"🔗 Link chat: https://t.me/{USERNAME_VENDITORE}")
     print("🔘 Pulsante VETRINA sotto l'immagine")
     print("💡 Comandi disponibili: /start, /help, /negozio, /shop, /time, /random, /echo")
     bot.infinity_polling()
