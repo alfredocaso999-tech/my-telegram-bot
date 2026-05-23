@@ -55,36 +55,24 @@ def scarica_video(url, filename="temp_video.mp4"):
         print(f"Errore durante il download: {e}")
         return None
 
-# ==================== INTERCETTA QUALSIASI MESSAGGIO (ANCHE SENZA /start) ====================
+# ==================== MENU PRINCIPALE DIRETTO ====================
+@bot.message_handler(commands=['start'])
+def start(message):
+    """Mostra il menu principale direttamente"""
+    mostra_menu(message.chat.id, message.from_user.first_name)
+
 @bot.message_handler(func=lambda message: True)
-def gestisci_qualsiasi_messaggio(message):
-    """Gestisce qualsiasi messaggio, mostrando subito il pulsante Avvia Bot se necessario"""
-    
-    # Se l'utente ha già i bottoni del menu, non fare nulla
+def gestisci_messaggio(message):
+    """Per qualsiasi messaggio, mostra il menu principale"""
+    # Se l'utente sta già usando i bottoni del menu, non fare nulla
     if message.text in ["🛍️ NEGOZIO", "❓ HELP", "⏰ TIME", "🎲 RANDOM"]:
         return
     
-    # Se l'utente ha già premuto Avvia Bot, non mostrare di nuovo
-    if message.text == "🚀 AVVIA BOT":
-        avvia_bot(message)
-        return
-    
-    # Per QUALSIASI altro messaggio, mostra il pulsante Avvia Bot
-    markup = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    bottone_avvia = telebot.types.KeyboardButton("🚀 AVVIA BOT")
-    markup.add(bottone_avvia)
-    
-    bot.reply_to(
-        message,
-        f"👋 Ciao {message.from_user.first_name}!\n\n"
-        f"Premi il pulsante 🚀 AVVIA BOT qui sotto per iniziare a usare il Negozio Family!",
-        reply_markup=markup
-    )
+    # Mostra il menu principale
+    mostra_menu(message.chat.id, message.from_user.first_name)
 
-# ==================== PULSANTE "AVVIA BOT" ====================
-@bot.message_handler(func=lambda message: message.text == "🚀 AVVIA BOT")
-def avvia_bot(message):
-    """Gestisce il pulsante Avvia Bot e mostra il menu principale"""
+def mostra_menu(chat_id, nome_utente):
+    """Mostra il menu principale con tutti i pulsanti"""
     markup = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
     bottoni_menu = [
         telebot.types.KeyboardButton("🛍️ NEGOZIO"),
@@ -95,10 +83,10 @@ def avvia_bot(message):
     markup.add(*bottoni_menu)
     
     bot.send_message(
-        message.chat.id,
-        f"🎉 *BOT AVVIATO!* 🎉\n\n"
-        f"Benvenuto nel Negozio Family, {message.from_user.first_name}!\n\n"
-        f"✨ Usa i pulsanti qui sotto:\n"
+        chat_id,
+        f"🎉 *BENVENUTO NEL NEGOZIO FAMILY!* 🎉\n\n"
+        f"Ciao {nome_utente}!\n\n"
+        f"✨ *Usa i pulsanti qui sotto:*\n"
         f"• 🛍️ NEGOZIO - Vedi i prodotti\n"
         f"• ❓ HELP - Tutti i comandi\n"
         f"• ⏰ TIME - Orario attuale\n"
@@ -130,26 +118,12 @@ def pulsante_random(message):
     random_cmd(message)
 
 # ==================== COMANDI BASE ====================
-@bot.message_handler(commands=['start'])
-def start(message):
-    """Comando start legacy"""
-    # Mostra comunque il pulsante Avvia Bot
-    markup = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    bottone_avvia = telebot.types.KeyboardButton("🚀 AVVIA BOT")
-    markup.add(bottone_avvia)
-    
-    bot.reply_to(
-        message,
-        f"✅ Ciao {message.from_user.first_name}!\n\nPremi 🚀 AVVIA BOT per iniziare!",
-        reply_markup=markup
-    )
-
 @bot.message_handler(commands=['help'])
 def help_cmd(message):
     testo = """
 🤖 *COMANDI DISPONIBILI*
 
-/start - Mostra il pulsante Avvia Bot
+/start - Mostra il menu principale
 /help - Questo messaggio
 /time - Orario attuale
 /echo <testo> - Ripete il tuo messaggio
@@ -340,7 +314,7 @@ def health():
 def run_bot():
     print("🤖 Bot avviato su Render!")
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
-    print("✨ Il bot risponde a QUALSIASI messaggio con il pulsante Avvia Bot!")
+    print("✨ Il bot mostra il menu automaticamente a qualsiasi messaggio!")
     bot.infinity_polling()
 
 if __name__ == '__main__':
