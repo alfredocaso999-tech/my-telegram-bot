@@ -38,6 +38,9 @@ PRODOTTI = {
     }
 }
 
+# ==================== URL DELL'IMMAGINE ====================
+URL_IMMAGINE = "https://i.postimg.cc/Kvkn183Z/IMG-0666.png"  # TUA IMMAGINE
+
 # ==================== FUNZIONE PER SCARICARE VIDEO ====================
 def scarica_video(url, filename="temp_video.mp4"):
     """Scarica un video da un URL e lo salva localmente"""
@@ -55,10 +58,12 @@ def scarica_video(url, filename="temp_video.mp4"):
         print(f"Errore durante il download: {e}")
         return None
 
-# ==================== COMANDO START CON PULSANTE VETRINA ====================
+# ==================== COMANDO START CON IMMAGINE E PULSANTE ====================
 @bot.message_handler(commands=['start'])
 def start(message):
-    """Messaggio di benvenuto con pulsante Vetrina"""
+    """Messaggio di benvenuto con immagine e pulsante Vetrina"""
+    
+    # Crea il pulsante Vetrina
     markup = telebot.types.InlineKeyboardMarkup()
     bottone_vetrina = telebot.types.InlineKeyboardButton(
         "🛍️ VETRINA", 
@@ -66,20 +71,27 @@ def start(message):
     )
     markup.add(bottone_vetrina)
     
-    bot.send_message(
-        message.chat.id,
-        f"🎉 *BENVENUTO NEL NEGOZIO FAMILY!* 🎉\n\n"
-        f"Ciao {message.from_user.first_name}!\n\n"
-        f"✨ Benvenuto nel mio shop!\n\n"
-        f"📦 Clicca sul pulsante qui sotto per vedere i nostri prodotti:\n\n"
-        f"💡 *Puoi anche usare i comandi:*\n"
-        f"• /negozio - Apre la vetrina\n"
-        f"• /help - Tutti i comandi\n"
-        f"• /time - Orario attuale\n"
-        f"• /random - Numero casuale",
-        parse_mode="Markdown",
-        reply_markup=markup
-    )
+    # Testo da visualizzare
+    testo = f"✨ BENVENUTA FAMILY ✨\n\nCiao {message.from_user.first_name}!\n\nClicca sul pulsante qui sotto per vedere i nostri prodotti 👇"
+    
+    # Invia immagine con didascalia e pulsante
+    try:
+        bot.send_photo(
+            message.chat.id,
+            URL_IMMAGINE,
+            caption=testo,
+            parse_mode="Markdown",
+            reply_markup=markup
+        )
+    except Exception as e:
+        print(f"Errore nell'invio dell'immagine: {e}")
+        # Se l'immagine non si carica, invia solo il testo
+        bot.send_message(
+            message.chat.id,
+            f"🖼️ *BENVENUTA FAMILY* 🖼️\n\n{testo}",
+            parse_mode="Markdown",
+            reply_markup=markup
+        )
 
 # ==================== GESTIONE PULSANTE VETRINA ====================
 @bot.callback_query_handler(func=lambda call: call.data == "apri_vetrina")
@@ -94,7 +106,7 @@ def help_cmd(message):
     testo = """
 🤖 *COMANDI DISPONIBILI*
 
-/start - Messaggio di benvenuto con pulsante Vetrina
+/start - Apre il negozio con immagine
 /help - Questo messaggio
 /time - Orario attuale
 /echo <testo> - Ripete il tuo messaggio
@@ -103,7 +115,7 @@ def help_cmd(message):
 /shop - Alternativa a /negozio
 
 📦 *Come acquistare:*
-1️⃣ Clicca su VETRINA o usa /negozio
+1️⃣ Clicca su VETRINA
 2️⃣ Scegli un prodotto
 3️⃣ Clicca su ACQUISTA ORA
 4️⃣ Contatta @tousername per completare l'ordine
@@ -152,7 +164,7 @@ def negozio(message):
 def gestisci_click(call):
     """Gestisce tutti i click sui bottoni inline"""
     
-    # CASO: Apri vetrina (già gestito sopra, ma lo teniamo per sicurezza)
+    # CASO: Apri vetrina
     if call.data == "apri_vetrina":
         negozio(call.message)
         bot.answer_callback_query(call.id)
@@ -298,7 +310,8 @@ def health():
 def run_bot():
     print("🤖 Bot avviato su Render!")
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
-    print("🔘 Pulsante VETRINA nel messaggio di benvenuto")
+    print("🖼️ Immagine di benvenuto: https://i.postimg.cc/Kvkn183Z/IMG-0666.png")
+    print("🔘 Pulsante VETRINA sotto l'immagine")
     print("💡 Comandi disponibili: /start, /help, /negozio, /shop, /time, /random, /echo")
     bot.infinity_polling()
 
