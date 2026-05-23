@@ -84,7 +84,7 @@ def start(message):
             parse_mode="Markdown",
             reply_markup=markup
         )
-        print(f"✅ Immagine inviata: {URL_IMMAGINE}")
+        print(f"https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png")
     except Exception as e:
         print(f"❌ Errore nell'invio dell'immagine: {e}")
         # Se l'immagine non si carica, invia solo il testo
