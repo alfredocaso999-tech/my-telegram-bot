@@ -111,8 +111,8 @@ def help_cmd(message):
 📦 *Come acquistare:*
 1️⃣ Clicca su VETRINA
 2️⃣ Scegli un prodotto
-3️⃣ Clicca su ACQUISTA ORA
-4️⃣ Contatta @tousername per completare l'ordine
+3️⃣ Clicca su CONTATTACI
+4️⃣ Contatta il venditore per completare l'ordine
     """
     bot.reply_to(message, testo, parse_mode="Markdown")
 
@@ -178,7 +178,7 @@ def gestisci_click(call):
         
         markup = telebot.types.InlineKeyboardMarkup(row_width=2)
         bottone_acquista = telebot.types.InlineKeyboardButton(
-            "✅ ACQUISTA ORA", 
+            "📞 CONTATTACI", 
             callback_data=f"acquista_{id_prodotto}"
         )
         bottone_video = telebot.types.InlineKeyboardButton(
@@ -267,7 +267,7 @@ def gestisci_click(call):
             )
             bot.answer_callback_query(call.id, "⚠️ Errore nel video")
     
-    # CASO 4: L'utente ha cliccato "Acquista"
+    # CASO 4: L'utente ha cliccato "Contattaci"
     elif call.data.startswith("acquista_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
@@ -281,23 +281,15 @@ def gestisci_click(call):
         
         bot.send_message(
             call.message.chat.id,
-            f"✅ *ORDINE RICEVUTO!* ✅\n\n"
+            f"📞 *CONTATTA IL VENDITORE* 📞\n\n"
             f"📦 *Prodotto:* {prodotto['nome']}\n"
-            f"💰 *Totale:* {prodotto['prezzo']}\n\n"
-            f"📝 *Come procedere:*\n"
-            f"1️⃣ Clicca sul pulsante qui sotto\n"
-            f"2️⃣ Invia il codice: *ORD-{id_prodotto}*\n"
-            f"3️⃣ Riceverai le istruzioni per il pagamento\n\n"
-            f"💳 *Metodi di pagamento accettati:*\n"
-            f"• PayPal\n"
-            f"• Bonifico\n"
-            f"• Carta di credito\n\n"
-            f"_Una volta confermato il pagamento, riceverai l'accesso immediato!_ 🚀",
+            f"💰 *Prezzo:* {prodotto['prezzo']}\n\n"
+            f"🟢 *Clicca sul pulsante qui sotto per contattarci e completare l'ordine!*",
             parse_mode="Markdown",
             reply_markup=markup
         )
         
-        bot.answer_callback_query(call.id, "🛒 Prodotto aggiunto! Contatta il venditore per completare l'ordine")
+        bot.answer_callback_query(call.id, "📞 Contatta il venditore per completare l'ordine")
 
 # ==================== SERVER FLASK PER RENDER ====================
 app = Flask(__name__)
