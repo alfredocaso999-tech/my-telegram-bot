@@ -142,7 +142,7 @@ def negozio(message):
     
     for id_prodotto, prodotto in PRODOTTI.items():
         bottone = telebot.types.InlineKeyboardButton(
-            text=f"📦 {prodotto['nome']} - {prodotto['prezzo']}",
+            text=f" {prodotto['nome']} - {prodotto['prezzo']}",
             callback_data=f"prod_{id_prodotto}"
         )
         markup.add(bottone)
@@ -171,7 +171,7 @@ def gestisci_click(call):
         prodotto = PRODOTTI[id_prodotto]
         
         testo = f"""
-*📦 {prodotto['nome']}*
+* {prodotto['nome']}*
 
 💰 *Prezzo:* {prodotto['prezzo']}
         """
@@ -206,7 +206,7 @@ def gestisci_click(call):
         markup = telebot.types.InlineKeyboardMarkup(row_width=1)
         for id_prodotto, prodotto in PRODOTTI.items():
             bottone = telebot.types.InlineKeyboardButton(
-                text=f"📦 {prodotto['nome']} - {prodotto['prezzo']}",
+                text=f" {prodotto['nome']} - {prodotto['prezzo']}",
                 callback_data=f"prod_{id_prodotto}"
             )
             markup.add(bottone)
