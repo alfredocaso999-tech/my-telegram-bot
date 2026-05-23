@@ -276,7 +276,7 @@ def gestisci_click(call):
         prodotto = PRODOTTI[id_prodotto]
         
         # Crea il link diretto per la chat
-        link_chat = f"https://t.me/{USERNAME_VENDITORE}"
+        link_chat = f"https://t.me/the_true_freedom{USERNAME_VENDITORE}"
         
         # Invia messaggio con link cliccabile
         bot.send_message(
