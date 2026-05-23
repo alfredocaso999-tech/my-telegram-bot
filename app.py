@@ -164,7 +164,7 @@ def gestisci_click(call):
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
-            text=f"📞 *Contatta il venditore*\n\n📦 Prodotto: {prodotto['nome']}\n💰 Prezzo: {prodotto['prezzo']}\n\nClicca sul pulsante per aprire la chat:",
+            text=f"📞 *APRI CHAT PER PARLARE CON TrueFreedom*['nome']} {prodotto['prezzo']}",
             parse_mode="Markdown",
             reply_markup=markup
         )
