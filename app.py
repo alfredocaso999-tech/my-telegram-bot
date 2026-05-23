@@ -72,7 +72,7 @@ def start(message):
     markup.add(bottone_vetrina)
     
     # Testo da visualizzare
-    testo = f"✨ BENVENUTA FAMILY ✨\n\nCiao {message.from_user.first_name}!\n\nClicca sul pulsante qui sotto per vedere i nostri prodotti 👇"
+    testo = f" BENVENUTA FAMILY \n\nCiao {message.from_user.first_name}!\n\nClicca sul pulsante qui sotto per vedere i nostri prodotti 👇"
     
     # Invia immagine con didascalia e pulsante
     try:
