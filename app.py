@@ -39,7 +39,8 @@ PRODOTTI = {
 }
 
 # ==================== URL DELL'IMMAGINE ====================
-URL_IMMAGINE = "https://picsum.photos/512/512"  # TUA IMMAGINE
+# USA IL TUO LINK DIRETTO CORRETTO:
+URL_IMMAGINE = "https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png"
 
 # ==================== FUNZIONE PER SCARICARE VIDEO ====================
 def scarica_video(url, filename="temp_video.mp4"):
@@ -83,8 +84,9 @@ def start(message):
             parse_mode="Markdown",
             reply_markup=markup
         )
+        print(f"✅ Immagine inviata: {URL_IMMAGINE}")
     except Exception as e:
-        print(f"Errore nell'invio dell'immagine: {e}")
+        print(f"❌ Errore nell'invio dell'immagine: {e}")
         # Se l'immagine non si carica, invia solo il testo
         bot.send_message(
             message.chat.id,
@@ -92,13 +94,6 @@ def start(message):
             parse_mode="Markdown",
             reply_markup=markup
         )
-
-# ==================== GESTIONE PULSANTE VETRINA ====================
-@bot.callback_query_handler(func=lambda call: call.data == "apri_vetrina")
-def apri_vetrina(call):
-    """Apre la vetrina quando si clicca sul pulsante"""
-    negozio(call.message)
-    bot.answer_callback_query(call.id)
 
 # ==================== COMANDI BASE ====================
 @bot.message_handler(commands=['help'])
@@ -160,6 +155,7 @@ def negozio(message):
         reply_markup=markup
     )
 
+# ==================== UNICO CALLBACK HANDLER ====================
 @bot.callback_query_handler(func=lambda call: True)
 def gestisci_click(call):
     """Gestisce tutti i click sui bottoni inline"""
@@ -272,7 +268,7 @@ def gestisci_click(call):
         markup = telebot.types.InlineKeyboardMarkup()
         bottone_contatta = telebot.types.InlineKeyboardButton(
             "📞 CONTATTA IL VENDITORE",
-            url="https://t.me/tousername"
+            url="https://t.me/tousername"  # CAMBIA CON IL TUO USERNAME!
         )
         markup.add(bottone_contatta)
         
@@ -310,7 +306,7 @@ def health():
 def run_bot():
     print("🤖 Bot avviato su Render!")
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
-    print("🖼️ Immagine di benvenuto: https://i.postimg.cc/Kvkn183Z/IMG-0666.png")
+    print(f"🖼️ Immagine di benvenuto: {URL_IMMAGINE}")
     print("🔘 Pulsante VETRINA sotto l'immagine")
     print("💡 Comandi disponibili: /start, /help, /negozio, /shop, /time, /random, /echo")
     bot.infinity_polling()
