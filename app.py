@@ -17,24 +17,24 @@ bot = telebot.TeleBot(TOKEN)
 # ==================== PRODOTTI DELLA VETRINA ====================
 PRODOTTI = {
     "1": {
-        "nome": "🍫DRY M.F.L🍫",
-        "prezzo": "1g 10€ 5g 40€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
-    },
-    "2": {
         "nome": "🇨🇦SUPER BOOL🇨🇦",
         "prezzo": "0.90 10€ 5g 50€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779554533/2_ywim4n.mp4"
     },
+    "2": {
+        "nome": "🇨🇦PINK RUNTZ🇨🇦",
+        "prezzo": "0.90 10€ 5g 50€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779555553/3_s8fjuk.mp4"
+    },
     "3": {
-        "nome": " Corso Graphic Design",
-        "prezzo": "39.99 €",
-        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "nome": "🇺🇸SNOWBALL🇺🇸",
+        "prezzo": "5g 70€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779555745/4_bhqgac.mp4"
     },
     "4": {
-        "nome": " Corso Telegram Bot",
-        "prezzo": "34.99 €",
-        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "nome": "🍫DRY M.F.L🍫",
+        "prezzo": "1g 10€ 5g 40€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
     }
 }
 
