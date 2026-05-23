@@ -39,7 +39,6 @@ PRODOTTI = {
 }
 
 # ==================== URL DELL'IMMAGINE ====================
-# USA IL TUO LINK DIRETTO CORRETTO:
 URL_IMMAGINE = "https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png"
 
 # ==================== FUNZIONE PER SCARICARE VIDEO ====================
@@ -72,8 +71,8 @@ def start(message):
     )
     markup.add(bottone_vetrina)
     
-    # Testo da visualizzare
-    testo = f"✨ BENVENUTA FAMILY ✨\n\nCiao {message.from_user.first_name}!\n\nClicca sul pulsante qui sotto per vedere i nostri prodotti 👇"
+    # Testo da visualizzare (SOLO BENVENUTA FAMILY)
+    testo = f"🩸 BENVENUTA FAMILY 🩸"
     
     # Invia immagine con didascalia e pulsante
     try:
@@ -84,13 +83,13 @@ def start(message):
             parse_mode="Markdown",
             reply_markup=markup
         )
-        print(f"https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png")
+        print(f"✅ Immagine inviata: {URL_IMMAGINE}")
     except Exception as e:
         print(f"❌ Errore nell'invio dell'immagine: {e}")
         # Se l'immagine non si carica, invia solo il testo
         bot.send_message(
             message.chat.id,
-            f"🖼️ *BENVENUTA FAMILY* 🖼️\n\n{testo}",
+            "🩸 BENVENUTA FAMILY 🩸",
             parse_mode="Markdown",
             reply_markup=markup
         )
@@ -229,25 +228,33 @@ def gestisci_click(call):
         bot.send_message(call.message.chat.id, "🎬 Sto preparando il video... un attimo di pazienza!")
         
         try:
-            video_path = scarica_video(prodotto['video_url'])
-            
-            if video_path:
-                with open(video_path, 'rb') as video_file:
-                    bot.send_video(
-                        call.message.chat.id,
-                        video_file,
-                        caption=f"🎬 *{prodotto['nome']}*\n💰 {prodotto['prezzo']}",
-                        parse_mode="Markdown",
-                        supports_streaming=True,
-                        timeout=60
-                    )
-                os.remove(video_path)
-            else:
+            # Controlla se è un link YouTube
+            if "youtube.com" in prodotto['video_url'] or "youtu.be" in prodotto['video_url']:
                 bot.send_message(
                     call.message.chat.id,
-                    f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\nLink: {prodotto['video_url']}",
+                    f"🎬 *{prodotto['nome']}*\n\n📹 Link video: {prodotto['video_url']}\n💰 Prezzo: {prodotto['prezzo']}",
                     parse_mode="Markdown"
                 )
+            else:
+                video_path = scarica_video(prodotto['video_url'])
+                
+                if video_path:
+                    with open(video_path, 'rb') as video_file:
+                        bot.send_video(
+                            call.message.chat.id,
+                            video_file,
+                            caption=f"🎬 *{prodotto['nome']}*\n💰 {prodotto['prezzo']}",
+                            parse_mode="Markdown",
+                            supports_streaming=True,
+                            timeout=60
+                        )
+                    os.remove(video_path)
+                else:
+                    bot.send_message(
+                        call.message.chat.id,
+                        f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\nLink: {prodotto['video_url']}",
+                        parse_mode="Markdown"
+                    )
             
             bot.answer_callback_query(call.id, "🎬 Video inviato!")
             
