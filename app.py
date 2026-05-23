@@ -39,8 +39,9 @@ PRODOTTI = {
 }
 
 # ==================== USERNAME DEL VENDITORE ====================
-# CAMBIA QUESTO CON IL TUO USERNAME TELEGRAM (senza @)
-USERNAME_VENDITORE = "tuo_username"  # Esempio: "mariorossi"
+# 🇮🇹 CAMBIA QUESTO CON IL TUO USERNAME TELEGRAM (senza @)
+# Esempio: se il tuo username è @mario_rossi, scrivi "mario_rossi"
+USERNAME_VENDITORE = "tuo_username_qui"
 
 # ==================== URL DELL'IMMAGINE ====================
 URL_IMMAGINE = "https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png"
@@ -276,7 +277,7 @@ def gestisci_click(call):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        # Crea il link diretto per la chat (CORRETTO)
+        # 🔥 LINK CORRETTO - senza "the_true_freedom" 🔥
         link_chat = f"https://t.me/{USERNAME_VENDITORE}"
         
         # Invia messaggio con link cliccabile
