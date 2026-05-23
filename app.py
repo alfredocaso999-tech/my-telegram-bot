@@ -92,7 +92,7 @@ def negozio(message):
     
     bot.send_message(message.chat.id, " *🦍 I NOSTRI PRODOTTI 🦍*", parse_mode="Markdown", reply_markup=markup)
 
-# ==================== CALLBACK HANDLER VELOCE ====================
+# ==================== CALLBACK HANDLER ULTRA VELOCE ====================
 @bot.callback_query_handler(func=lambda call: True)
 def gestisci_click(call):
     if call.data == "apri_vetrina":
@@ -125,31 +125,19 @@ def gestisci_click(call):
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=" *🦍 I NOSTRI PRODOTTI 🦍*\n\nScegli un prodotto:", parse_mode="Markdown", reply_markup=markup)
         bot.answer_callback_query(call.id)
     
-    # 🔥 VERSIONE VELOCE - Invia video direttamente senza scaricare 🔥
+    # 🚀 VERSIONE ULTRA VELOCE - Invia solo il link (istantaneo!) 🚀
     elif call.data.startswith("video_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        # Invia il video direttamente dall'URL di Cloudinary
-        # NON scarica nulla sul server, è molto più veloce!
-        try:
-            bot.send_video(
-                call.message.chat.id,
-                prodotto['video_url'],
-                caption=f"🎬 *{prodotto['nome']}*\n💰 {prodotto['prezzo']}",
-                parse_mode="Markdown",
-                supports_streaming=True,
-                timeout=30
-            )
-            bot.answer_callback_query(call.id, "🎬 Video inviato!")
-        except Exception as e:
-            # Se c'è un errore, manda il link
-            bot.send_message(
-                call.message.chat.id,
-                f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\n📹 Link video: {prodotto['video_url']}",
-                parse_mode="Markdown"
-            )
-            bot.answer_callback_query(call.id, "⚠️ Link video inviato!")
+        # Invia SOLO il link - richiede 1 secondo invece di 30!
+        bot.send_message(
+            call.message.chat.id,
+            f"🎬 *{prodotto['nome']}*\n\n💰 *Prezzo:* {prodotto['prezzo']}\n\n📹 *Guarda il video qui:*\n{prodotto['video_url']}",
+            parse_mode="Markdown",
+            disable_web_page_preview=False
+        )
+        bot.answer_callback_query(call.id, "🎬 Link video inviato!")
     
     elif call.data.startswith("acquista_"):
         id_prodotto = call.data.split("_")[1]
@@ -177,7 +165,7 @@ def health():
 def run_bot():
     print("🤖 Bot avviato su Render!")
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
-    print("⚡ Modalità VELOCE attivata - invio video diretto!")
+    print("⚡ Modalità ULTRA VELOCE attivata - invio solo link!")
     bot.infinity_polling()
 
 if __name__ == '__main__':
