@@ -39,64 +39,24 @@ PRODOTTI = {
 }
 
 # ==================== USERNAME DEL VENDITORE ====================
-# Il tuo username Telegram (senza @)
 USERNAME_VENDITORE = "the_true_freedom"
 
 # ==================== URL DELL'IMMAGINE ====================
 URL_IMMAGINE = "https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png"
 
-# ==================== FUNZIONE PER SCARICARE VIDEO ====================
-def scarica_video(url, filename="temp_video.mp4"):
-    """Scarica un video da un URL e lo salva localmente"""
-    try:
-        response = requests.get(url, timeout=30, stream=True)
-        if response.status_code == 200:
-            with open(filename, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
-            return filename
-        else:
-            print(f"Errore download: status {response.status_code}")
-            return None
-    except Exception as e:
-        print(f"Errore durante il download: {e}")
-        return None
-
-# ==================== COMANDO START CON IMMAGINE E PULSANTE ====================
+# ==================== COMANDO START ====================
 @bot.message_handler(commands=['start'])
 def start(message):
-    """Messaggio di benvenuto con immagine e pulsante Vetrina"""
-    
-    # Crea il pulsante Vetrina
     markup = telebot.types.InlineKeyboardMarkup()
-    bottone_vetrina = telebot.types.InlineKeyboardButton(
-        "🛒 VETRINA", 
-        callback_data="apri_vetrina"
-    )
+    bottone_vetrina = telebot.types.InlineKeyboardButton("🛒 VETRINA", callback_data="apri_vetrina")
     markup.add(bottone_vetrina)
     
-    # Testo da visualizzare (SOLO BENVENUTA FAMILY)
     testo = f"🩸 BENVENUTA FAMILY 🩸"
     
-    # Invia immagine con didascalia e pulsante
     try:
-        bot.send_photo(
-            message.chat.id,
-            URL_IMMAGINE,
-            caption=testo,
-            parse_mode="Markdown",
-            reply_markup=markup
-        )
-        print(f"✅ Immagine inviata: {URL_IMMAGINE}")
+        bot.send_photo(message.chat.id, URL_IMMAGINE, caption=testo, parse_mode="Markdown", reply_markup=markup)
     except Exception as e:
-        print(f"❌ Errore nell'invio dell'immagine: {e}")
-        # Se l'immagine non si carica, invia solo il testo
-        bot.send_message(
-            message.chat.id,
-            "🩸 BENVENUTA FAMILY 🩸",
-            parse_mode="Markdown",
-            reply_markup=markup
-        )
+        bot.send_message(message.chat.id, "🩸 BENVENUTA FAMILY 🩸", parse_mode="Markdown", reply_markup=markup)
 
 # ==================== COMANDI BASE ====================
 @bot.message_handler(commands=['help'])
@@ -104,19 +64,15 @@ def help_cmd(message):
     testo = """
 🤖 *COMANDI DISPONIBILI*
 
-/start - Apre il negozio con immagine
+/start - Apre il negozio
 /help - Questo messaggio
 /time - Orario attuale
-/echo <testo> - Ripete il tuo messaggio
-/random - Numero casuale (1-100)
 /negozio - Apre la vetrina prodotti
-/shop - Alternativa a /negozio
 
 📦 *Come acquistare:*
 1️⃣ Clicca su VETRINA
 2️⃣ Scegli un prodotto
 3️⃣ Clicca su CONTATTACI
-4️⃣ Clicca sul link per contattare il venditore
     """
     bot.reply_to(message, testo, parse_mode="Markdown")
 
@@ -124,26 +80,9 @@ def help_cmd(message):
 def time_cmd(message):
     bot.reply_to(message, datetime.now().strftime("⏰ %H:%M:%S - %d/%m/%Y"))
 
-@bot.message_handler(commands=['echo'])
-def echo_cmd(message):
-    text = message.text.replace('/echo', '').strip()
-    if text:
-        bot.reply_to(message, f"🔊 {text}")
-    else:
-        bot.reply_to(message, "❓ Cosa vuoi che ripeta? Usa: /echo <testo>")
-
-@bot.message_handler(commands=['random'])
-def random_cmd(message):
-    num = random.randint(1, 100)
-    bot.reply_to(message, f"🎲 Numero casuale: {num}")
-
-# ==================== VETRINA / NEGOZIO ====================
 @bot.message_handler(commands=['negozio', 'shop'])
 def negozio(message):
-    """Mostra la lista dei prodotti disponibili"""
-    
     markup = telebot.types.InlineKeyboardMarkup(row_width=1)
-    
     for id_prodotto, prodotto in PRODOTTI.items():
         bottone = telebot.types.InlineKeyboardButton(
             text=f" {prodotto['nome']} - {prodotto['prezzo']}",
@@ -151,149 +90,85 @@ def negozio(message):
         )
         markup.add(bottone)
     
-    bot.send_message(
-        message.chat.id,
-        " *🦍 I NOSTRI PRODOTTI 🦍*",
-        parse_mode="Markdown",
-        reply_markup=markup
-    )
+    bot.send_message(message.chat.id, " *🦍 I NOSTRI PRODOTTI 🦍*", parse_mode="Markdown", reply_markup=markup)
 
-# ==================== UNICO CALLBACK HANDLER ====================
+# ==================== CALLBACK HANDLER VELOCE ====================
 @bot.callback_query_handler(func=lambda call: True)
 def gestisci_click(call):
-    """Gestisce tutti i click sui bottoni inline"""
-    
-    # CASO: Apri vetrina
     if call.data == "apri_vetrina":
         negozio(call.message)
         bot.answer_callback_query(call.id)
         return
     
-    # CASO 1: L'utente ha cliccato su un prodotto
     if call.data.startswith("prod_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        testo = f"""
-* {prodotto['nome']}*
-
-💰 *Prezzo:* {prodotto['prezzo']}
-        """
+        testo = f"\n* {prodotto['nome']}*\n\n💰 *Prezzo:* {prodotto['prezzo']}"
         
         markup = telebot.types.InlineKeyboardMarkup(row_width=2)
-        bottone_acquista = telebot.types.InlineKeyboardButton(
-            "📞 CONTATTACI", 
-            callback_data=f"acquista_{id_prodotto}"
-        )
-        bottone_video = telebot.types.InlineKeyboardButton(
-            "🎬 GUARDA VIDEO", 
-            callback_data=f"video_{id_prodotto}"
-        )
-        bottone_indietro = telebot.types.InlineKeyboardButton(
-            "◀️ TORNA AL CATALOGO", 
-            callback_data="catalogo"
-        )
+        bottone_acquista = telebot.types.InlineKeyboardButton("📞 CONTATTACI", callback_data=f"acquista_{id_prodotto}")
+        bottone_video = telebot.types.InlineKeyboardButton("🎬 GUARDA VIDEO", callback_data=f"video_{id_prodotto}")
+        bottone_indietro = telebot.types.InlineKeyboardButton("◀️ TORNA AL CATALOGO", callback_data="catalogo")
         markup.add(bottone_acquista, bottone_video)
         markup.add(bottone_indietro)
         
-        bot.edit_message_text(
-            chat_id=call.message.chat.id,
-            message_id=call.message.message_id,
-            text=testo,
-            parse_mode="Markdown",
-            reply_markup=markup
-        )
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=testo, parse_mode="Markdown", reply_markup=markup)
         bot.answer_callback_query(call.id)
     
-    # CASO 2: L'utente vuole tornare al catalogo
     elif call.data == "catalogo":
         markup = telebot.types.InlineKeyboardMarkup(row_width=1)
         for id_prodotto, prodotto in PRODOTTI.items():
-            bottone = telebot.types.InlineKeyboardButton(
-                text=f" {prodotto['nome']} - {prodotto['prezzo']}",
-                callback_data=f"prod_{id_prodotto}"
-            )
+            bottone = telebot.types.InlineKeyboardButton(text=f" {prodotto['nome']} - {prodotto['prezzo']}", callback_data=f"prod_{id_prodotto}")
             markup.add(bottone)
         
-        bot.edit_message_text(
-            chat_id=call.message.chat.id,
-            message_id=call.message.message_id,
-            text=" *🦍 I NOSTRI PRODOTTI 🦍*\n\nScegli un prodotto:",
-            parse_mode="Markdown",
-            reply_markup=markup
-        )
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=" *🦍 I NOSTRI PRODOTTI 🦍*\n\nScegli un prodotto:", parse_mode="Markdown", reply_markup=markup)
         bot.answer_callback_query(call.id)
     
-    # CASO 3: L'utente vuole vedere il video
+    # 🔥 VERSIONE VELOCE - Invia video direttamente senza scaricare 🔥
     elif call.data.startswith("video_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        bot.send_message(call.message.chat.id, "🎬 Sto preparando il video... un attimo di pazienza!")
-        
+        # Invia il video direttamente dall'URL di Cloudinary
+        # NON scarica nulla sul server, è molto più veloce!
         try:
-            # Controlla se è un link YouTube
-            if "youtube.com" in prodotto['video_url'] or "youtu.be" in prodotto['video_url']:
-                bot.send_message(
-                    call.message.chat.id,
-                    f"🎬 *{prodotto['nome']}*\n\n📹 Link video: {prodotto['video_url']}\n💰 Prezzo: {prodotto['prezzo']}",
-                    parse_mode="Markdown"
-                )
-            else:
-                video_path = scarica_video(prodotto['video_url'])
-                
-                if video_path:
-                    with open(video_path, 'rb') as video_file:
-                        bot.send_video(
-                            call.message.chat.id,
-                            video_file,
-                            caption=f"🎬 *{prodotto['nome']}*\n💰 {prodotto['prezzo']}",
-                            parse_mode="Markdown",
-                            supports_streaming=True,
-                            timeout=60
-                        )
-                    os.remove(video_path)
-                else:
-                    bot.send_message(
-                        call.message.chat.id,
-                        f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\nLink: {prodotto['video_url']}",
-                        parse_mode="Markdown"
-                    )
-            
+            bot.send_video(
+                call.message.chat.id,
+                prodotto['video_url'],
+                caption=f"🎬 *{prodotto['nome']}*\n💰 {prodotto['prezzo']}",
+                parse_mode="Markdown",
+                supports_streaming=True,
+                timeout=30
+            )
             bot.answer_callback_query(call.id, "🎬 Video inviato!")
-            
         except Exception as e:
-            print(f"Errore: {e}")
+            # Se c'è un errore, manda il link
             bot.send_message(
                 call.message.chat.id,
-                f"❌ Errore video.\nLink: {prodotto['video_url']}",
+                f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\n📹 Link video: {prodotto['video_url']}",
                 parse_mode="Markdown"
             )
-            bot.answer_callback_query(call.id, "⚠️ Errore nel video")
+            bot.answer_callback_query(call.id, "⚠️ Link video inviato!")
     
-    # CASO 4: L'utente ha cliccato "Contattaci" - Link diretto alla chat
     elif call.data.startswith("acquista_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
-        
-        # Crea il link con il tuo username
         link_chat = f"https://t.me/{USERNAME_VENDITORE}"
         
-        # Invia messaggio con link cliccabile (USA link_chat!)
         bot.send_message(
             call.message.chat.id,
-            f"📞 *Contatta il venditore per {prodotto['nome']}* 💰 {prodotto['prezzo']}\n\n🡲 [CLICCA QUI PER PARLARE CON TrueFreedom]({link_chat})",
+            f"📞 *Contatta il venditore per {prodotto['nome']}* 💰 {prodotto['prezzo']}\n\n👉 [CLICCA QUI PER PARLARE CON TrueFreedom]({link_chat})",
             parse_mode="Markdown"
         )
-        
         bot.answer_callback_query(call.id, "📞 Link chat aperto!")
 
-# ==================== SERVER FLASK PER RENDER ====================
+# ==================== SERVER FLASK ====================
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "🤖 Bot Telegram attivo su Render! Usa /start per iniziare!"
+    return "🤖 Bot Telegram attivo su Render!"
 
 @app.route('/health')
 def health():
@@ -302,11 +177,7 @@ def health():
 def run_bot():
     print("🤖 Bot avviato su Render!")
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
-    print(f"🖼️ Immagine di benvenuto: {URL_IMMAGINE}")
-    print(f"👤 Username venditore: {USERNAME_VENDITORE}")
-    print(f"🔗 Link chat: https://t.me/{USERNAME_VENDITORE}")
-    print("🔘 Pulsante VETRINA sotto l'immagine")
-    print("💡 Comandi disponibili: /start, /help, /negozio, /shop, /time, /random, /echo")
+    print("⚡ Modalità VELOCE attivata - invio video diretto!")
     bot.infinity_polling()
 
 if __name__ == '__main__':
