@@ -41,7 +41,7 @@ PRODOTTI = {
 # ==================== USERNAME DEL VENDITORE ====================
 # 🇮🇹 CAMBIA QUESTO CON IL TUO USERNAME TELEGRAM (senza @)
 # Esempio: se il tuo username è @mario_rossi, scrivi "mario_rossi"
-USERNAME_VENDITORE = "tuo_username_qui"
+USERNAME_VENDITORE = "the_true_freedom"
 
 # ==================== URL DELL'IMMAGINE ====================
 URL_IMMAGINE = "https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png"
