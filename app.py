@@ -39,7 +39,7 @@ PRODOTTI = {
 }
 
 # ==================== URL DELL'IMMAGINE ====================
-URL_IMMAGINE = "https://i.postimg.cc/Kvkn183Z/IMG-0666.png"  # TUA IMMAGINE
+URL_IMMAGINE = "https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png"  # TUA IMMAGINE
 
 # ==================== FUNZIONE PER SCARICARE VIDEO ====================
 def scarica_video(url, filename="temp_video.mp4"):
