@@ -159,12 +159,15 @@ def gestisci_click(call):
         
         markup = telebot.types.InlineKeyboardMarkup()
         bottone_chat = telebot.types.InlineKeyboardButton("📞 APRI CHAT", url=link_chat)
+        bottone_indietro = telebot.types.InlineKeyboardButton("◀️ TORNA INDIETRO", callback_data="catalogo")
         markup.add(bottone_chat)
+        markup.add(bottone_indietro)
         
+        # 🔥 RIGA CORRETTA (prima era sbagliata) 🔥
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
-            text=f"📞 *APRI CHAT PER PARLARE CON TrueFreedom*['nome']} {prodotto['prezzo']}",
+            text=f"📞 *APRI CHAT PER PARLARE CON TRUE FREEDOM*\n\n📦 Prodotto: {prodotto['nome']}\n💰 Prezzo: {prodotto['prezzo']}\n\n🡲 Clicca sul pulsante per aprire la chat:",
             parse_mode="Markdown",
             reply_markup=markup
         )
