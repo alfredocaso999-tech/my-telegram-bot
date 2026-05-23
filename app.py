@@ -1,172 +1,29 @@
-import telebot
-import os
-import random
-import requests
-from datetime import datetime
-import threading
-from flask import Flask
-
-TOKEN = os.environ.get('BOT_TOKEN')
-
-if not TOKEN:
-    print("❌ ERRORE: Imposta BOT_TOKEN nelle variabili d'ambiente")
-    exit(1)
-
-bot = telebot.TeleBot(TOKEN)
-
-# ==================== PRODOTTI DELLA VETRINA ====================
-PRODOTTI = {
-    "1": {
-        "nome": "dry m.f.l",
-        "prezzo": "29.99 €",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
-    },
-    "2": {
-        "nome": "📹 Corso Video Editing",
-        "prezzo": "49.99 €",
-        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    },
-    "3": {
-        "nome": "🎨 Corso Graphic Design",
-        "prezzo": "39.99 €",
-        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    },
-    "4": {
-        "nome": "🤖 Corso Telegram Bot",
-        "prezzo": "34.99 €",
-        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    }
-}
-
-# ==================== URL DELL'IMMAGINE ====================
-URL_IMMAGINE = "https://i.postimg.cc/7Z1ZBCrp/IMG-0666.png"  # TUA IMMAGINE
-
-# ==================== FUNZIONE PER SCARICARE VIDEO ====================
-def scarica_video(url, filename="temp_video.mp4"):
-    """Scarica un video da un URL e lo salva localmente"""
-    try:
-        response = requests.get(url, timeout=30, stream=True)
-        if response.status_code == 200:
-            with open(filename, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
-            return filename
-        else:
-            print(f"Errore download: status {response.status_code}")
-            return None
-    except Exception as e:
-        print(f"Errore durante il download: {e}")
-        return None
-
-# ==================== COMANDO START CON IMMAGINE E PULSANTE ====================
-@bot.message_handler(commands=['start'])
-def start(message):
-    """Messaggio di benvenuto con immagine e pulsante Vetrina"""
-    
-    # Crea il pulsante Vetrina
-    markup = telebot.types.InlineKeyboardMarkup()
-    bottone_vetrina = telebot.types.InlineKeyboardButton(
-        "🛒 VETRINA", 
-        callback_data="apri_vetrina"
-    )
-    markup.add(bottone_vetrina)
-    
-    # Testo da visualizzare
-    testo = f" 🩸BENVENUTA FAMILY🩸"
-    
-    # Invia immagine con didascalia e pulsante
-    try:
-        bot.send_photo(
-            message.chat.id,
-            URL_IMMAGINE,
-            caption=testo,
-            parse_mode="Markdown",
-            reply_markup=markup
-        )
-    except Exception as e:
-        print(f"Errore nell'invio dell'immagine: {e}")
-        # Se l'immagine non si carica, invia solo il testo
-        bot.send_message(
-            message.chat.id,
-            f"🖼️ *BENVENUTA FAMILY* 🖼️\n\n{testo}",
-            parse_mode="Markdown",
-            reply_markup=markup
-        )
-
-# ==================== GESTIONE PULSANTE VETRINA ====================
-@bot.callback_query_handler(func=lambda call: call.data == "apri_vetrina")
-def apri_vetrina(call):
-    """Apre la vetrina quando si clicca sul pulsante"""
-    negozio(call.message)
-    bot.answer_callback_query(call.id)
-
-# ==================== COMANDI BASE ====================
-@bot.message_handler(commands=['help'])
-def help_cmd(message):
-    testo = """
-🤖 *COMANDI DISPONIBILI*
-
-/start - Apre il negozio con immagine
-/help - Questo messaggio
-/time - Orario attuale
-/echo <testo> - Ripete il tuo messaggio
-/random - Numero casuale (1-100)
-/negozio - Apre la vetrina prodotti
-/shop - Alternativa a /negozio
-
-📦 *Come acquistare:*
-1️⃣ Clicca su VETRINA
-2️⃣ Scegli un prodotto
-3️⃣ Clicca su ACQUISTA ORA
-4️⃣ Contatta @tousername per completare l'ordine
-    """
-    bot.reply_to(message, testo, parse_mode="Markdown")
-
-@bot.message_handler(commands=['time'])
-def time_cmd(message):
-    bot.reply_to(message, datetime.now().strftime("⏰ %H:%M:%S - %d/%m/%Y"))
-
-@bot.message_handler(commands=['echo'])
-def echo_cmd(message):
-    text = message.text.replace('/echo', '').strip()
-    if text:
-        bot.reply_to(message, f"🔊 {text}")
-    else:
-        bot.reply_to(message, "❓ Cosa vuoi che ripeta? Usa: /echo <testo>")
-
-@bot.message_handler(commands=['random'])
-def random_cmd(message):
-    num = random.randint(1, 100)
-    bot.reply_to(message, f"🎲 Numero casuale: {num}")
-
-# ==================== VETRINA / NEGOZIO ====================
-@bot.message_handler(commands=['negozio', 'shop'])
-def negozio(message):
-    """Mostra la lista dei prodotti disponibili"""
-    
-    markup = telebot.types.InlineKeyboardMarkup(row_width=1)
-    
-    for id_prodotto, prodotto in PRODOTTI.items():
-        bottone = telebot.types.InlineKeyboardButton(
-            text=f"📦 {prodotto['nome']} - {prodotto['prezzo']}",
-            callback_data=f"prod_{id_prodotto}"
-        )
-        markup.add(bottone)
-    
-    bot.send_message(
-        message.chat.id,
-        " *🦍I NOSTRI PRODOTTI🦍",
-        parse_mode="Markdown",
-        reply_markup=markup
-    )
-
+# ==================== UNICO CALLBACK HANDLER ====================
 @bot.callback_query_handler(func=lambda call: True)
 def gestisci_click(call):
     """Gestisce tutti i click sui bottoni inline"""
     
-    # CASO: Apri vetrina
+    # DEBUG: stampa per vedere cosa arriva
+    print(f"Callback ricevuto: {call.data}")
+    
+    # CASO: Apri vetrina (dal pulsante sotto l'immagine)
     if call.data == "apri_vetrina":
-        negozio(call.message)
+        # Modifica il messaggio invece di inviarne uno nuovo
+        markup = telebot.types.InlineKeyboardMarkup(row_width=1)
+        for id_prodotto, prodotto in PRODOTTI.items():
+            bottone = telebot.types.InlineKeyboardButton(
+                text=f"📦 {prodotto['nome']} - {prodotto['prezzo']}",
+                callback_data=f"prod_{id_prodotto}"
+            )
+            markup.add(bottone)
+        
+        bot.edit_message_text(
+            chat_id=call.message.chat.id,
+            message_id=call.message.message_id,
+            text="🛍️ *🦍 I NOSTRI PRODOTTI 🦍*\n\nScegli un prodotto:",
+            parse_mode="Markdown",
+            reply_markup=markup
+        )
         bot.answer_callback_query(call.id)
         return
     
@@ -219,7 +76,7 @@ def gestisci_click(call):
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
-            text="🛍️ *✨ NOSTRI PRODOTTI ✨*\n\nScegli un prodotto:",
+            text="🛍️ *🦍 I NOSTRI PRODOTTI 🦍*\n\nScegli un prodotto:",
             parse_mode="Markdown",
             reply_markup=markup
         )
@@ -233,25 +90,33 @@ def gestisci_click(call):
         bot.send_message(call.message.chat.id, "🎬 Sto preparando il video... un attimo di pazienza!")
         
         try:
-            video_path = scarica_video(prodotto['video_url'])
-            
-            if video_path:
-                with open(video_path, 'rb') as video_file:
-                    bot.send_video(
-                        call.message.chat.id,
-                        video_file,
-                        caption=f"🎬 *{prodotto['nome']}*\n💰 {prodotto['prezzo']}",
-                        parse_mode="Markdown",
-                        supports_streaming=True,
-                        timeout=60
-                    )
-                os.remove(video_path)
-            else:
+            # Per link YouTube è meglio inviare solo il link
+            if "youtube.com" in prodotto['video_url'] or "youtu.be" in prodotto['video_url']:
                 bot.send_message(
                     call.message.chat.id,
-                    f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\nLink: {prodotto['video_url']}",
+                    f"🎬 *{prodotto['nome']}*\n\n📹 Video: {prodotto['video_url']}\n💰 Prezzo: {prodotto['prezzo']}",
                     parse_mode="Markdown"
                 )
+            else:
+                video_path = scarica_video(prodotto['video_url'])
+                
+                if video_path:
+                    with open(video_path, 'rb') as video_file:
+                        bot.send_video(
+                            call.message.chat.id,
+                            video_file,
+                            caption=f"🎬 *{prodotto['nome']}*\n💰 {prodotto['prezzo']}",
+                            parse_mode="Markdown",
+                            supports_streaming=True,
+                            timeout=60
+                        )
+                    os.remove(video_path)
+                else:
+                    bot.send_message(
+                        call.message.chat.id,
+                        f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\nLink: {prodotto['video_url']}",
+                        parse_mode="Markdown"
+                    )
             
             bot.answer_callback_query(call.id, "🎬 Video inviato!")
             
@@ -272,7 +137,7 @@ def gestisci_click(call):
         markup = telebot.types.InlineKeyboardMarkup()
         bottone_contatta = telebot.types.InlineKeyboardButton(
             "📞 CONTATTA IL VENDITORE",
-            url="https://t.me/tousername"
+            url="https://t.me/tousername"  # CAMBIA CON IL TUO USERNAME!
         )
         markup.add(bottone_contatta)
         
@@ -295,29 +160,3 @@ def gestisci_click(call):
         )
         
         bot.answer_callback_query(call.id, "🛒 Prodotto aggiunto! Contatta il venditore per completare l'ordine")
-
-# ==================== SERVER FLASK PER RENDER ====================
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "🤖 Bot Telegram attivo su Render! Usa /start per iniziare!"
-
-@app.route('/health')
-def health():
-    return "OK", 200
-
-def run_bot():
-    print("🤖 Bot avviato su Render!")
-    print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
-    print("🖼️ Immagine di benvenuto: https://i.postimg.cc/Kvkn183Z/IMG-0666.png")
-    print("🔘 Pulsante VETRINA sotto l'immagine")
-    print("💡 Comandi disponibili: /start, /help, /negozio, /shop, /time, /random, /echo")
-    bot.infinity_polling()
-
-if __name__ == '__main__':
-    bot_thread = threading.Thread(target=run_bot)
-    bot_thread.start()
-    
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
