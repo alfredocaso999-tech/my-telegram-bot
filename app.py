@@ -92,7 +92,7 @@ def negozio(message):
     
     bot.send_message(message.chat.id, " *🦍 I NOSTRI PRODOTTI 🦍*", parse_mode="Markdown", reply_markup=markup)
 
-# ==================== CALLBACK HANDLER ULTRA VELOCE ====================
+# ==================== CALLBACK HANDLER ====================
 @bot.callback_query_handler(func=lambda call: True)
 def gestisci_click(call):
     if call.data == "apri_vetrina":
@@ -125,31 +125,50 @@ def gestisci_click(call):
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=" *🦍 I NOSTRI PRODOTTI 🦍*\n\nScegli un prodotto:", parse_mode="Markdown", reply_markup=markup)
         bot.answer_callback_query(call.id)
     
-    # 🚀 VERSIONE ULTRA VELOCE - Invia solo il link (istantaneo!) 🚀
+    # 🎬 VIDEO - Usa un bottone inline con URL diretto
     elif call.data.startswith("video_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        # Invia SOLO il link - richiede 1 secondo invece di 30!
-        bot.send_message(
-            call.message.chat.id,
-            f"🎬 *{prodotto['nome']}*\n\n💰 *Prezzo:* {prodotto['prezzo']}\n\n📹 *Guarda il video qui:*\n{prodotto['video_url']}",
-            parse_mode="Markdown",
-            disable_web_page_preview=False
+        # Crea un bottone che apre il video quando cliccato
+        markup = telebot.types.InlineKeyboardMarkup()
+        bottone_video = telebot.types.InlineKeyboardButton(
+            "🎬 APRI VIDEO", 
+            url=prodotto['video_url']  # Questo apre il link direttamente
         )
-        bot.answer_callback_query(call.id, "🎬 Link video inviato!")
+        bottone_indietro = telebot.types.InlineKeyboardButton(
+            "◀️ TORNA INDIETRO", 
+            callback_data="catalogo"
+        )
+        markup.add(bottone_video)
+        markup.add(bottone_indietro)
+        
+        bot.edit_message_text(
+            chat_id=call.message.chat.id,
+            message_id=call.message.message_id,
+            text=f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}\n\nClicca sul pulsante qui sotto per guardare il video:",
+            parse_mode="Markdown",
+            reply_markup=markup
+        )
+        bot.answer_callback_query(call.id)
     
     elif call.data.startswith("acquista_"):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         link_chat = f"https://t.me/{USERNAME_VENDITORE}"
         
-        bot.send_message(
-            call.message.chat.id,
-            f"📞 *Contatta il venditore per {prodotto['nome']}* 💰 {prodotto['prezzo']}\n\n👉 [CLICCA QUI PER PARLARE CON TrueFreedom]({link_chat})",
-            parse_mode="Markdown"
+        markup = telebot.types.InlineKeyboardMarkup()
+        bottone_chat = telebot.types.InlineKeyboardButton("📞 APRI CHAT", url=link_chat)
+        markup.add(bottone_chat)
+        
+        bot.edit_message_text(
+            chat_id=call.message.chat.id,
+            message_id=call.message.message_id,
+            text=f"📞 *Contatta il venditore*\n\n📦 Prodotto: {prodotto['nome']}\n💰 Prezzo: {prodotto['prezzo']}\n\nClicca sul pulsante per aprire la chat:",
+            parse_mode="Markdown",
+            reply_markup=markup
         )
-        bot.answer_callback_query(call.id, "📞 Link chat aperto!")
+        bot.answer_callback_query(call.id)
 
 # ==================== SERVER FLASK ====================
 app = Flask(__name__)
@@ -165,7 +184,7 @@ def health():
 def run_bot():
     print("🤖 Bot avviato su Render!")
     print("📦 Vetrina prodotti caricata con", len(PRODOTTI), "prodotti")
-    print("⚡ Modalità ULTRA VELOCE attivata - invio solo link!")
+    print("✅ Video e chat con pulsanti cliccabili!")
     bot.infinity_polling()
 
 if __name__ == '__main__':
