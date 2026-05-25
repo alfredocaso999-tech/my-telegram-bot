@@ -46,7 +46,7 @@ PRODOTTI = {
     "5": {
         "nome": "🍫DRY SLURRICANE🍫",
         "prezzo": "1g 10€ 5g 40€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779705251/6_gy02r7.mp4"
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
 
      },
     "7": {
@@ -54,9 +54,8 @@ PRODOTTI = {
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706287/9_kbx3eq.mp4"
 
-    
-     },
-    "7": {
+    },
+    "8": {
         "nome": "🍫FROZEN SEATTLE COOKIES🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706441/10_hdc0qz.mp4"
