@@ -30,9 +30,8 @@ PRODOTTI = {
         "nome": "🇺🇸SNOWBALL🇺🇸",
         "prezzo": "5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779555745/4_bhqgac.mp4"
-
     },
-    "5": {
+    "9": {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "2g 10€ 5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
@@ -41,25 +40,21 @@ PRODOTTI = {
         "nome": "🍫DRY M.F.L🍫",
         "prezzo": "1g 10€ 5g 40€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779705936/7_m0ip6l.mp4"
-
-     },
+    },
     "5": {
         "nome": "🍫DRY SLURRICANE🍫",
         "prezzo": "1g 10€ 5g 40€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
-
-     },
+    },
     "7": {
         "nome": "🍫FROZEN MELLOW MANIA🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706287/9_kbx3eq.mp4"
-
     },
     "8": {
         "nome": "🍫FROZEN SEATTLE COOKIES🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706441/10_hdc0qz.mp4"
-
     },
     "6": {
         "nome": "🍫OVULO STATIC M.G🍫",
