@@ -37,7 +37,7 @@ PRODOTTI = {
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
     },
     "5": {
-        "nome": "🍫CATWOMAN🍫",
+        "nome": "🍫DRY CATWOMAN🍫",
         "prezzo": "1g 10€ 5g 40€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779882328/11_eom3t6.mp4"
     },
