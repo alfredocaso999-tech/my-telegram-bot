@@ -18,12 +18,12 @@ bot = telebot.TeleBot(TOKEN)
 PRODOTTI = {
     "1": {
         "nome": "🇨🇦SUPER BOOL🇨🇦",
-        "prezzo": "0.90 10€ 5g 50€",
+        "prezzo": "0.90 10€ 5g 50€🎁10g 85€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779554533/2_ywim4n.mp4"
     },
     "2": {
         "nome": "🇨🇦PINK RUNTZ🇨🇦",
-        "prezzo": "0.90 10€ 5g 50€",
+        "prezzo": "0.90 10€ 5g 50€🎁10g 85€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779555553/3_s8fjuk.mp4"
     },
     "3": {
@@ -38,7 +38,7 @@ PRODOTTI = {
     },
     "10": {
         "nome": "🍫DRY CATWOMAN🍫",
-        "prezzo": "1g 10€ 5g 40€",
+        "prezzo": "1g 10€ 5g 40€🎁10g 65€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779882328/11_eom3t6.mp4"
     },
     "4": {
@@ -48,22 +48,22 @@ PRODOTTI = {
     },
     "5": {
         "nome": "🍫DRY SLURRICANE🍫",
-        "prezzo": "1g 10€ 5g 40€",
+        "prezzo": "1g 10€ 5g 40€🎁10g 65€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
     },
     "7": {
         "nome": "🍫FROZEN MELLOW MANIA🍫",
-        "prezzo": "1g 15€ 5g 70€",
+        "prezzo": "1g 15€ 5g 70€🎁10g 120€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706287/9_kbx3eq.mp4"
     },
     "8": {
         "nome": "🍫FROZEN SEATTLE COOKIES🍫",
-        "prezzo": "1g 15€ 5g 70€",
+        "prezzo": "1g 15€ 5g 70€🎁10g 120€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706441/10_hdc0qz.mp4"
     },
     "6": {
         "nome": "🍫OVULO STATIC M.G🍫",
-        "prezzo": "1g 20€ 5g 100€ 🚨2g 35€🚨",
+        "prezzo": "1g 20€ 5g 100€🎁2g 35€ 10g 180€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706183/8_odpehx.mp4"
     }
 }
