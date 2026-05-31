@@ -35,6 +35,11 @@ PRODOTTI = {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "2g 10€ 5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
+     },
+    "11": {
+        "nome": "🍫DRY BARCELONA STARS🍫",
+        "prezzo": "🎁5g 25€🎁",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1780225049/12_vy1yeb.mp4"
     },
     "10": {
         "nome": "🍫DRY CATWOMAN🍫",
