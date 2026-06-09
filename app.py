@@ -35,25 +35,26 @@ PRODOTTI = {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "2g 10€ 5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
+
      },
-    "11": {
-        "nome": "🍫DRY BARCELONA STARS🍫",
-        "prezzo": "🎁5g 25€🎁",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1780225049/12_vy1yeb.mp4"
-    },
     "10": {
         "nome": "🍫DRY CATWOMAN🍫",
-        "prezzo": "1g 10€ 5g 40€🎁10g 65€🎁",
+        "prezzo": "1g 10€ 5g 30€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779882328/11_eom3t6.mp4"
+     },
+    "11": {
+        "nome": "🍫DRY KINDER BUFALO PLEIN🍫",
+        "prezzo": "1g 10€ 5g 35€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1780999505/12_h0cjvt.mp4"
     },
     "4": {
-        "nome": "🍫DRY M.F.L🍫",
-        "prezzo": "1g 10€ 5g 40€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779705936/7_m0ip6l.mp4"
+        "nome": "🍫DRY DUREX BUFALO PLEIN🍫",
+        "prezzo": "25g 150€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1780999711/13_vhbxas.mp4"
     },
     "5": {
         "nome": "🍫DRY SLURRICANE🍫",
-        "prezzo": "1g 10€ 5g 40€🎁10g 65€🎁",
+        "prezzo": "1g 10€ 5g 35€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
     },
     "7": {
