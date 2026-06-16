@@ -39,17 +39,17 @@ PRODOTTI = {
      },
     "10": {
         "nome": "🍫DRY CATWOMAN🍫",
-        "prezzo": "1g 10€ 5g 30€",
+        "prezzo": "1g 10€ 🎁5g 30€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779882328/11_eom3t6.mp4"
      },
     "11": {
         "nome": "🍫DRY BUFALO PLEIN🍫",
-        "prezzo": "1g 10€ 5g 30€",
+        "prezzo": "1g 10€ 🎁5g 30€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1781607033/12_y2dtmg.mp4"
     },
     "4": {
         "nome": "🍫DRY DUREX BUFALO PLEIN🍫",
-        "prezzo": "25g 150€",
+        "prezzo": "🎁25g 150€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1780999711/13_vhbxas.mp4"
     },
     "5": {
