@@ -23,7 +23,7 @@ PRODOTTI = {
     },
     "2": {
         "nome": "🇨🇦PINK RUNTZ🇨🇦",
-        "prezzo": "0.90 10€ 5g 50€🎁10g 85€🎁",
+        "prezzo": "0.90 10€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779555553/3_s8fjuk.mp4"
     },
     "3": {
@@ -35,17 +35,6 @@ PRODOTTI = {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "2g 10€ 5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
-
-     },
-    "10": {
-        "nome": "🍫DRY CATWOMAN🍫",
-        "prezzo": "1g 10€ 🎁5g 30€🎁",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779882328/11_eom3t6.mp4"
-     },
-    "11": {
-        "nome": "🍫DRY BUFALO PLEIN🍫",
-        "prezzo": "1g 10€ 🎁5g 30€🎁",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1781607033/12_y2dtmg.mp4"
     },
     "4": {
         "nome": "🍫DRY DUREX BUFALO PLEIN🍫",
@@ -56,6 +45,11 @@ PRODOTTI = {
         "nome": "🍫DRY SLURRICANE🍫",
         "prezzo": "1g 10€ 5g 35€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
+     },
+    "11": {
+        "nome": "🍫FROZEN BUFALO PLEIN🍫",
+        "prezzo": "1g 15€ 🎁5g 60€🎁",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782044166/5_qjoav4.mp4"
     },
     "7": {
         "nome": "🍫FROZEN MELLOW MANIA🍫",
@@ -64,7 +58,7 @@ PRODOTTI = {
     },
     "8": {
         "nome": "🍫FROZEN SEATTLE COOKIES🍫",
-        "prezzo": "1g 15€ 5g 70€🎁10g 120€🎁",
+        "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706441/10_hdc0qz.mp4"
     },
     "6": {
