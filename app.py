@@ -38,7 +38,7 @@ PRODOTTI = {
     },
     "4": {
         "nome": "🍫DRY DUREX BUFALO PLEIN🍫",
-        "prezzo": "🎁25g 150€🎁",
+        "prezzo": "1g 10€ 🎁25g 150€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1780999711/13_vhbxas.mp4"
     },
     "5": {
