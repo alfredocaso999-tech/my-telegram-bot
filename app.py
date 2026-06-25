@@ -18,13 +18,8 @@ bot = telebot.TeleBot(TOKEN)
 PRODOTTI = {
     "1": {
         "nome": "🇨🇦SUPER BOOL🇨🇦",
-        "prezzo": "0.90 10€ 5g 50€🎁10g 85€🎁",
+        "prezzo": "0.90 10€ 5g 50€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779554533/2_ywim4n.mp4"
-    },
-    "2": {
-        "nome": "🇨🇦PINK RUNTZ🇨🇦",
-        "prezzo": "0.90 10€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779555553/3_s8fjuk.mp4"
     },
     "3": {
         "nome": "🇺🇸SNOWBALL🇺🇸",
@@ -37,13 +32,13 @@ PRODOTTI = {
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
     },
     "4": {
-        "nome": "🍫DRY DUREX BUFALO PLEIN🍫",
-        "prezzo": "1g 10€ 🎁25g 150€🎁",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1780999711/13_vhbxas.mp4"
+        "nome": "🍫DRY OREO B.PANCAKES🍫",
+        "prezzo": "1g 10€ 🎁5g 30€🎁",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782353459/7_bozv9p.mp4"
     },
     "5": {
         "nome": "🍫DRY SLURRICANE🍫",
-        "prezzo": "1g 10€ 5g 35€",
+        "prezzo": "1g 10€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
      },
     "11": {
