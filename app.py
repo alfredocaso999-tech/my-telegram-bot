@@ -23,7 +23,7 @@ PRODOTTI = {
     },
     "3": {
         "nome": "🇺🇸SNOWBALL🇺🇸",
-        "prezzo": "5g 70€",
+        "prezzo": "0.80g 10€ 🎁5g 60€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779555745/4_bhqgac.mp4"
     },
     "9": {
