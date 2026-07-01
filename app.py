@@ -16,9 +16,14 @@ bot = telebot.TeleBot(TOKEN)
 
 # ==================== PRODOTTI DELLA VETRINA ====================
 PRODOTTI = {
+     "12": {
+        "nome": "🇨🇦CANDY RUNTZ🇨🇦",
+        "prezzo": "0.90 10€ 5g 50€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782903449/11_fvagmg.mp4"
+    },
     "1": {
         "nome": "🇨🇦SUPER BOOL🇨🇦",
-        "prezzo": "0.90 10€ 5g 50€",
+        "prezzo": "0.90 10€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779554533/2_ywim4n.mp4"
     },
     "3": {
@@ -35,6 +40,11 @@ PRODOTTI = {
         "nome": "🍫DRY OREO B.PANCAKES🍫",
         "prezzo": "1g 10€ 🎁5g 30€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782353459/7_bozv9p.mp4"
+     },
+    "4": {
+        "nome": "🍫DRY SWEET COFFEE🍫",
+        "prezzo": "1g 10€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782353459/7_bozv9p.mp4"
     },
     "5": {
         "nome": "🍫DRY SLURRICANE🍫",
@@ -50,11 +60,6 @@ PRODOTTI = {
         "nome": "🍫FROZEN MELLOW MANIA🍫",
         "prezzo": "1g 15€ 5g 70€🎁10g 120€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706287/9_kbx3eq.mp4"
-    },
-    "8": {
-        "nome": "🍫FROZEN SEATTLE COOKIES🍫",
-        "prezzo": "1g 15€ 5g 70€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706441/10_hdc0qz.mp4"
     },
     "6": {
         "nome": "🍫OVULO STATIC M.G🍫",
