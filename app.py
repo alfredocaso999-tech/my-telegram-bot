@@ -21,11 +21,6 @@ PRODOTTI = {
         "prezzo": "0.90 10€ 5g 50€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782903449/11_fvagmg.mp4"
     },
-    "1": {
-        "nome": "🇨🇦SUPER BOOL🇨🇦",
-        "prezzo": "0.90 10€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779554533/2_ywim4n.mp4"
-    },
     "3": {
         "nome": "🇺🇸SNOWBALL🇺🇸",
         "prezzo": "0.80g 10€ 🎁5g 60€🎁",
@@ -35,21 +30,16 @@ PRODOTTI = {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "2g 10€ 5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
-    },
-    "4": {
-        "nome": "🍫DRY OREO B.PANCAKES🍫",
-        "prezzo": "1g 10€ 🎁5g 30€🎁",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782353459/7_bozv9p.mp4"
      },
     "13": {
-        "nome": "🍫DRY SWEET COFFEE🍫",
-        "prezzo": "1g 10€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782903908/12_qnqedv.mp4"
+        "nome": "🍫FROZEN PINK LIMEZ🍫",
+        "prezzo": "5g 70€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345401/6_vv51kk.mp4"
     },
     "5": {
-        "nome": "🍫DRY SLURRICANE🍫",
-        "prezzo": "1g 10€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779487727/10_drdrrd.mp4"
+        "nome": "🍫FROZEN ZOWHAYA🍫",
+        "prezzo": "5g 70€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345326/14_lbvceq.mp4"
      },
     "11": {
         "nome": "🍫FROZEN BUFALO PLEIN🍫",
