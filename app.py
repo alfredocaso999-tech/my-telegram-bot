@@ -35,15 +35,20 @@ PRODOTTI = {
         "nome": "🍫DRY FRESH🍫",
         "prezzo": "1g 10€ 5g 30€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783451780/2_n4hduq.mp4"
+    },
+    "2": {
+        "nome": "🍫DRY KINDER BUFALO PLEIN🍫",
+        "prezzo": "1g 10€ 5g 35€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783477577/6_g8hp11.mp4"
      },
     "13": {
         "nome": "🍫FROZEN PINK LIMEZ🍫",
-        "prezzo": "5g 70€",
+        "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345401/6_vv51kk.mp4"
     },
     "5": {
         "nome": "🍫FROZEN ZOWHAYA🍫",
-        "prezzo": "5g 70€",
+        "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345326/14_lbvceq.mp4"
      },
     "11": {
@@ -53,7 +58,7 @@ PRODOTTI = {
     },
     "7": {
         "nome": "🍫FROZEN MELLOW MANIA🍫",
-        "prezzo": "1g 15€ 5g 70€🎁10g 120€🎁",
+        "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706287/9_kbx3eq.mp4"
     },
     "6": {
