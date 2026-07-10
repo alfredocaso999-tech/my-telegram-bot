@@ -31,10 +31,15 @@ PRODOTTI = {
         "prezzo": "2g 10€ 5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
     },
-    "2": {
+    "8": {
         "nome": "🍫DRY FRESH🍫",
         "prezzo": "1g 10€ 5g 30€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783451780/2_n4hduq.mp4"
+    },
+    "16": {
+        "nome": "🍫DRY OREO PANCAKES🍫",
+        "prezzo": "1g 10€ 5g 35€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783646156/7_oja1rm.mp4"
     },
     "2": {
         "nome": "🍫DRY KINDER BUFALO PLEIN🍫",
