@@ -18,7 +18,7 @@ bot = telebot.TeleBot(TOKEN)
 PRODOTTI = {
      "12": {
         "nome": "🇨🇦CANDY RUNTZ🇨🇦",
-        "prezzo": "0.90 10€ 5g 50€",
+        "prezzo": "0.90 10€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782903449/11_fvagmg.mp4"
     },
     "3": {
