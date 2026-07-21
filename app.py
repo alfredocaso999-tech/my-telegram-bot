@@ -22,56 +22,46 @@ PRODOTTI = {
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782903449/11_fvagmg.mp4"
     },
     "2": {
-        "nome": "🇺🇸SNOWBALL🇺🇸",
-        "prezzo": "0.80g 10€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779555745/4_bhqgac.mp4"
-    },
-    "3": {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "2g 10€ 5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
     },
-    "4": {
-        "nome": "🍫DRY FRESH🍫",
-        "prezzo": "5g 30€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783451780/2_n4hduq.mp4"
-    },
-    "5": {
+    "3": {
         "nome": "🍫DRY OREO PANCAKES🍫",
         "prezzo": "1g 10€ 5g 35€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783646156/7_oja1rm.mp4"
     },
-    "6": {
+    "4": {
         "nome": "🍫DRY KINDER BUFALO PLEIN🍫",
         "prezzo": "1g 10€ 5g 35€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783477577/6_g8hp11.mp4"
      },
-    "7": {
+    "5": {
         "nome": "🍫FROZEN AURA FARMZ🍫",
         "prezzo": "1g 15€ 5g 60€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1784426556/12_yiqam3.mp4"
      },
-    "8": {
+    "6": {
         "nome": "🍫FROZEN BUFALO PLEIN🍫",
         "prezzo": "1g 15€ 5g 60€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782044166/5_qjoav4.mp4"
      },
-    "9": {
+    "7": {
         "nome": "🍫FROZEN PINK LIMEZ🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345401/6_vv51kk.mp4"
     },
-    "10": {
+    "8": {
         "nome": "🍫FROZEN ZOWHAYA🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345326/14_lbvceq.mp4"
     },
-    "11": {
+    "9": {
         "nome": "🍫FROZEN MELLOW MANIA🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706287/9_kbx3eq.mp4"
     },
-    "12": {
+    "10": {
         "nome": "🍫OVULO STATIC M.G🍫",
         "prezzo": "1g 20€ 5g 100€🎁2g 35€ 10g 180€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706183/8_odpehx.mp4"
