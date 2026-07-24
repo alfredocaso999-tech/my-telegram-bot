@@ -17,54 +17,54 @@ bot = telebot.TeleBot(TOKEN)
 # ==================== PRODOTTI DELLA VETRINA ====================
 PRODOTTI = {
      "1": {
-        "nome": "🇨🇦CANDY RUNTZ🇨🇦",
-        "prezzo": "0.90 10€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782903449/11_fvagmg.mp4"
-    },
+        "nome": "🇺🇸PURPLE URKLE🇺🇸",
+        "prezzo": "0.85g 10€ 5g 50€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1784906859/13_rsgqdb.mp4"
+   },
     "2": {
+        "nome": "🇨🇦BERRY RUNTZ🇨🇦",
+        "prezzo": "0.90 10€ 5g 50€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1784906919/14_bdymzp.mp4"
+    },
+    "3": {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "2g 10€ 5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
     },
-    "3": {
+    "4": {
         "nome": "🍫DRY OREO PANCAKES🍫",
-        "prezzo": "1g 10€ 5g 35€",
+        "prezzo": "1g 10€ 2g 15€ 5g 35€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783646156/7_oja1rm.mp4"
     },
-    "4": {
+    "5": {
         "nome": "🍫DRY KINDER BUFALO PLEIN🍫",
-        "prezzo": "1g 10€ 5g 35€",
+        "prezzo": "1g 10€ 2g 15€ 5g 35€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783477577/6_g8hp11.mp4"
      },
-    "5": {
+    "6": {
         "nome": "🍫FROZEN AURA FARMZ🍫",
         "prezzo": "1g 15€ 5g 60€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1784426556/12_yiqam3.mp4"
      },
-    "6": {
+    "7": {
         "nome": "🍫FROZEN BUFALO PLEIN🍫",
         "prezzo": "1g 15€ 5g 60€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782044166/5_qjoav4.mp4"
      },
-    "7": {
+    "8": {
         "nome": "🍫FROZEN PINK LIMEZ🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345401/6_vv51kk.mp4"
     },
-    "8": {
+    "9": {
         "nome": "🍫FROZEN ZOWHAYA🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345326/14_lbvceq.mp4"
     },
-    "9": {
+    "10": {
         "nome": "🍫FROZEN MELLOW MANIA🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706287/9_kbx3eq.mp4"
-    },
-    "10": {
-        "nome": "🍫OVULO STATIC M.G🍫",
-        "prezzo": "1g 20€ 5g 100€🎁2g 35€ 10g 180€🎁",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706183/8_odpehx.mp4"
     }
 }
 
