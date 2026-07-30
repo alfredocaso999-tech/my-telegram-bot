@@ -33,33 +33,18 @@ PRODOTTI = {
     },
     "4": {
         "nome": "🍫DRY OREO PANCAKES🍫",
-        "prezzo": "1g 10€ 2g 15€ 5g 35€",
+        "prezzo": "1g 10€ 🎁2g 15€🎁",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783646156/7_oja1rm.mp4"
     },
     "5": {
         "nome": "🍫DRY KINDER BUFALO PLEIN🍫",
-        "prezzo": "1g 10€ 2g 15€ 5g 35€",
+        "prezzo": "1g 10€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783477577/6_g8hp11.mp4"
-     },
-    "6": {
-        "nome": "🍫FROZEN AURA FARMZ🍫",
-        "prezzo": "1g 15€ 5g 60€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1784426556/12_yiqam3.mp4"
-     },
-    "7": {
-        "nome": "🍫FROZEN BUFALO PLEIN🍫",
-        "prezzo": "1g 15€ 5g 60€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1782044166/5_qjoav4.mp4"
      },
     "8": {
         "nome": "🍫FROZEN PINK LIMEZ🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345401/6_vv51kk.mp4"
-    },
-    "9": {
-        "nome": "🍫FROZEN ZOWHAYA🍫",
-        "prezzo": "1g 15€ 5g 70€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345326/14_lbvceq.mp4"
     },
     "10": {
         "nome": "🍫FROZEN MELLOW MANIA🍫",
