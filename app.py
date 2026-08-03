@@ -30,16 +30,26 @@ PRODOTTI = {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "2g 10€ 5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
+     },
+    "6": {
+        "nome": "🍫DRY MOUNTAIN GIANTS🍫",
+        "prezzo": "5g 35€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785764028/13_oobmws.mp4"
     },
     "4": {
         "nome": "🍫DRY OREO PANCAKES🍫",
-        "prezzo": "1g 10€ 🎁2g 15€🎁",
+        "prezzo": "1g 10€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783646156/7_oja1rm.mp4"
     },
     "5": {
         "nome": "🍫DRY KINDER BUFALO PLEIN🍫",
         "prezzo": "1g 10€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783477577/6_g8hp11.mp4"
+     },
+    "11": {
+        "nome": "🍫FROZEN AURA FARMZ🍫",
+        "prezzo": "1g 15€ 5g 60€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785764174/12_eurird.mp4"
      },
     "8": {
         "nome": "🍫FROZEN PINK LIMEZ🍫",
