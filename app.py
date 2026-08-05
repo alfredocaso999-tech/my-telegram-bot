@@ -16,6 +16,11 @@ bot = telebot.TeleBot(TOKEN)
 
 # ==================== PRODOTTI DELLA VETRINA ====================
 PRODOTTI = {
+        "13": {
+        "nome": "🇨🇦CONYZA CANADENSIS🇨🇦",
+        "prezzo": "0.90g 10€ 5g 45€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785950481/14_mqaclc.mp4"
+   },
      "1": {
         "nome": "🇺🇸PURPLE URKLE🇺🇸",
         "prezzo": "0.85g 10€ 5g 50€",
