@@ -18,17 +18,17 @@ bot = telebot.TeleBot(TOKEN)
 PRODOTTI = {
         "1": {
         "nome": "🇨🇦CONYZA CANADENSIS🇨🇦",
-        "prezzo": "0.90g 10€ 5g 45€",
+        "prezzo": "0.90g 10€ 5g 45€ CORRISPONDENZA LETTERA(C)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785950481/14_mqaclc.mp4"
    },
      "2": {
         "nome": "🇺🇸PURPLE URKLE🇺🇸",
-        "prezzo": "0.85g 10€ 5g 50€",
+        "prezzo": "0.85g 10€ 5g 50€ CORRISPONDENZA LETTERA(P)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1784906859/13_rsgqdb.mp4"
    },
     "3": {
         "nome": "🇨🇦BERRY RUNTZ🇨🇦",
-        "prezzo": "0.90 10€ 5g 50€",
+        "prezzo": "0.90 10€ 5g 50€ CORRISPONDENZA LETTERA(B)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1784906919/14_bdymzp.mp4"
     },
     "4": {
@@ -38,7 +38,7 @@ PRODOTTI = {
     },
     "5": {
         "nome": "🍫DRY BUFALO PLEIN(ARMAND DE BRIGNAC)🍫",
-        "prezzo": "1g 10€🎁25g 125€🎁",
+        "prezzo": "1g 10€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1786198332/15_an36sa.mp4"
      },
     "6": {
@@ -46,15 +46,10 @@ PRODOTTI = {
         "prezzo": "5g 35€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785764028/13_oobmws.mp4"
     },
-    "7": {
-        "nome": "🍫DRY OREO PANCAKES🍫",
-        "prezzo": "1g 10€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783646156/7_oja1rm.mp4"
-    },
     "8": {
-        "nome": "🍫DRY BUFALO PLEIN(KINDER DELICE)🍫",
-        "prezzo": "1g 10€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783477577/6_g8hp11.mp4"
+        "nome": "🍫DRY BUFALO PLEIN🍫(🐯TIGER🐯)",
+        "prezzo": "1g 10€ 5g 30€ CORRISPONDENZA LETTERA(T)",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1786672372/7_zvz0vd.mp4"
      },
     "9": {
         "nome": "🍫FROZEN PINK LIMEZ🍫",
