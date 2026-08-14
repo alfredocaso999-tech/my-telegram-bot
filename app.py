@@ -129,7 +129,7 @@ def gestisci_click(call):
         id_prodotto = call.data.split("_")[1]
         prodotto = PRODOTTI[id_prodotto]
         
-        testo = f"\n* {prodotto['nome']}*\n\n💰 *Prezzo:* {prodotto['prezzo']}"
+        testo = f"\n* {prodotto['nome']}*\n\n💰*Prezzo:* {prodotto['prezzo']}"
         
         markup = telebot.types.InlineKeyboardMarkup(row_width=2)
         bottone_acquista = telebot.types.InlineKeyboardButton("📞 CONTATTACI", callback_data=f"acquista_{id_prodotto}")
@@ -171,7 +171,7 @@ def gestisci_click(call):
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
-            text=f"🎬 *{prodotto['nome']}*\n\n💰 Prezzo: {prodotto['prezzo']}",
+            text=f"🎬 *{prodotto['nome']}*\n\n💰Prezzo: {prodotto['prezzo']}",
             parse_mode="Markdown",
             reply_markup=markup
         )
