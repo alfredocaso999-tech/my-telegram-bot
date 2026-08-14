@@ -23,12 +23,12 @@ PRODOTTI = {
    },
      "2": {
         "nome": "🇺🇸PURPLE URKLE🇺🇸",
-        "prezzo": "0.85g 10€ 5g 50€ CORRISPONDENZA LETTERA(P)",
+        "prezzo": "0.85g 10€ CORRISPONDENZA LETTERA(P)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1784906859/13_rsgqdb.mp4"
    },
     "3": {
         "nome": "🇨🇦BERRY RUNTZ🇨🇦",
-        "prezzo": "0.90 10€ 5g 50€ CORRISPONDENZA LETTERA(B)",
+        "prezzo": "0.90 10€ CORRISPONDENZA LETTERA(B)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1784906919/14_bdymzp.mp4"
     },
     "4": {
