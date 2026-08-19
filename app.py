@@ -47,9 +47,9 @@ PRODOTTI = {
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785764028/13_oobmws.mp4"
     },
     "8": {
-        "nome": "🍫DRY BUFALO PLEIN🍫(🐯TIGER🐯)",
-        "prezzo": "1g 10€ 5g 30€ CORRISPONDENZA LETTERA(T)",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1786672372/7_zvz0vd.mp4"
+        "nome": "🍫FROZEN PAPAYA DAWG🍫",
+        "prezzo": "1g 15€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1787164821/11_uaygqk.mp4"
      },
     "9": {
         "nome": "🍫FROZEN PINK LIMEZ🍫",
