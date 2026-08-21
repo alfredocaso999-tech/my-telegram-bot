@@ -33,7 +33,7 @@ PRODOTTI = {
     },
     "4": {
         "nome": "🍫MOUSSE🍫",
-        "prezzo": "2g 10€ 5g 20€",
+        "prezzo": "5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
     },
     "5": {
@@ -45,6 +45,11 @@ PRODOTTI = {
         "nome": "🍫DRY MOUNTAIN GIANTS🍫",
         "prezzo": "5g 35€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785764028/13_oobmws.mp4"
+     },
+    "7": {
+        "nome": "🍫PREMIUM STATIC(CANDY CREAM)🍫",
+        "prezzo": "1g 15€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1787327235/12_kv8vfb.mp4"
     },
     "8": {
         "nome": "🍫FROZEN PAPAYA DAWG🍫",
