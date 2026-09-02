@@ -33,18 +33,13 @@ PRODOTTI = {
      },
     "6": {
         "nome": "🍫DRY MOUNTAIN GIANTS🍫",
-        "prezzo": "1g 10€ 5g 35€ CORRISPONDENZA LETTERA(M.G)",
+        "prezzo": "1g 10€ CORRISPONDENZA LETTERA(M.G)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785764028/13_oobmws.mp4"
      },
     "7": {
         "nome": "🍫PREMIUM STATIC(CANDY CREAM)🍫",
         "prezzo": "1g 15€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1787327235/12_kv8vfb.mp4"
-    },
-    "8": {
-        "nome": "🍫FROZEN PAPAYA DAWG🍫",
-        "prezzo": "1g 15€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1787164821/11_uaygqk.mp4"
      },
     "9": {
         "nome": "🍫FROZEN PINK LIMEZ🍫",
