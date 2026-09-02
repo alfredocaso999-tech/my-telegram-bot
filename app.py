@@ -17,6 +17,11 @@ bot = telebot.TeleBot(TOKEN)
 # ==================== PRODOTTI DELLA VETRINA ====================
 PRODOTTI = {
         "1": {
+        "nome": "🇯🇲AMNESIA🇯🇲",
+        "prezzo": "5g 30€",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788315217/13_v1ml24.mp4"
+     },
+    "2": {
         "nome": "🇨🇦CONYZA CANADENSIS🇨🇦",
         "prezzo": "0.90g 10€ 5g 45€ CORRISPONDENZA LETTERA(C)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785950481/14_mqaclc.mp4"
