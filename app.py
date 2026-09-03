@@ -62,7 +62,7 @@ PRODOTTI = {
 USERNAME_VENDITORE = "the_true_freedom"
 
 # ==================== URL DELL'IMMAGINE ====================
-URL_IMMAGINE = "https://i.postimg.cc/63NFtYX6/5821090887512035323-19.jpg"
+URL_IMMAGINE = "https://postimg.cc/68HZjMVR"
 
 # ==================== COMANDO START ====================
 @bot.message_handler(commands=['start'])
