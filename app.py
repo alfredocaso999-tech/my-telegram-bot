@@ -30,6 +30,11 @@ PRODOTTI = {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
+    },
+    "6": {
+        "nome": "🍫DRY GREEN BOYS FARM🍫 🍉WATER MELON🍉",
+        "prezzo": "5g 35€ CORRISPONDENZA LETTERA(W.M)",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788400623/14_jka7uy.mp4"
      },
     "6": {
         "nome": "🍫DRY MOUNTAIN GIANTS🍫",
