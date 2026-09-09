@@ -25,36 +25,36 @@ PRODOTTI = {
         "nome": "🇨🇦CONYZA CANADENSIS🇨🇦",
         "prezzo": "0.90g 10€ 5g 45€ CORRISPONDENZA LETTERA(C)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785950481/14_mqaclc.mp4"
-    },
+     },
+    "3": {
+        "nome": "🇨🇦PURPLE HAZE🇨🇦",
+        "prezzo": "0,90g 10€ 5g 50€ CORRISPONDENZA LETTERA(P)",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788956456/16_v1r1ni.mp4"
+     },
     "4": {
+        "nome": "🇨🇦BLACK RUNTZ🇨🇦",
+        "prezzo": "0,90€ 10€ 5g 50€ CORRISPONDENZA LETTERA(R)",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788956365/15_pxl8jg.mp4"
+    },
+    "5": {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
     },
-    "3": {
-        "nome": "🍫DRY GREEN BOYS FARM🍫 🍉WATER MELON🍉",
-        "prezzo": "5g 35€ CORRISPONDENZA LETTERA(W.M)",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788400623/14_jka7uy.mp4"
-     },
     "6": {
-        "nome": "🍫DRY MOUNTAIN GIANTS🍫",
-        "prezzo": "1g 10€ CORRISPONDENZA LETTERA(M.G)",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785764028/13_oobmws.mp4"
+        "nome": "🍫DRY GREEN BOYS FARM🍫 🍉WATER MELON🍉",
+        "prezzo": "1g 10€ 5g 35€ CORRISPONDENZA LETTERA(W.M)",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788400623/14_jka7uy.mp4"
      },
     "7": {
         "nome": "🍫PREMIUM STATIC(CANDY CREAM)🍫",
-        "prezzo": "1g 15€",
+        "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1787327235/12_kv8vfb.mp4"
      },
-    "9": {
+    "8": {
         "nome": "🍫FROZEN PINK LIMEZ🍫",
-        "prezzo": "1g 15€ 5g 70€",
+        "prezzo": "1g 15€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345401/6_vv51kk.mp4"
-    },
-    "10": {
-        "nome": "🍫FROZEN MELLOW MANIA🍫",
-        "prezzo": "1g 15€ 5g 70€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706287/9_kbx3eq.mp4"
     }
 }
 
