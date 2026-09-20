@@ -42,17 +42,17 @@ PRODOTTI = {
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
      },
     "6": {
-        "nome": "🍫DRY GREEN BOYS FARM🍫 🍉WATER MELON🍉",
+        "nome": "🍫DRY GREEN BOYS FARM🍫 (🍉WATER MELON🍉)",
         "prezzo": "1g 10€ 5g 35€ CORRISPONDENZA LETTERA(W.M)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788400623/14_jka7uy.mp4"
      },
     "7": {
-        "nome": "🍫DRY SIFT ILLUMINATY FARM(TROPICANA COOKIES)🍫",
+        "nome": "🍫DRY SIFT ILLUMINATY FARM🍫 (🍪TROPICANA COOKIES🍪)",
         "prezzo": "5g 35€ CORRISPONDENZA LETTERA(T.C)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1789873790/7_a74axv.mp4"
      },
     "8": {
-        "nome": "🍫PREMIUM STATIC(CANDY CREAM)🍫",
+        "nome": "🍫PREMIUM STATIC🍫 (🍬CANDY CREAM🍬)",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1787327235/12_kv8vfb.mp4"
     }
