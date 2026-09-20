@@ -35,26 +35,26 @@ PRODOTTI = {
         "nome": "🇨🇦BLACK RUNTZ🇨🇦",
         "prezzo": "0,90€ 10€ 5g 50€ CORRISPONDENZA LETTERA(R)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788956365/15_pxl8jg.mp4"
-    },
+     },
     "5": {
         "nome": "🍫MOUSSE🍫",
         "prezzo": "5g 20€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
-    },
+     },
     "6": {
         "nome": "🍫DRY GREEN BOYS FARM🍫 🍉WATER MELON🍉",
         "prezzo": "1g 10€ 5g 35€ CORRISPONDENZA LETTERA(W.M)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788400623/14_jka7uy.mp4"
      },
     "7": {
+        "nome": "🍫DRY SIFT ILLUMINATY FARM(TROPICANA COOKIES)🍫",
+        "prezzo": "5g 35€ CORRISPONDENZA LETTERA(T.C)",
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1789873790/7_a74axv.mp4"
+     },
+    "8": {
         "nome": "🍫PREMIUM STATIC(CANDY CREAM)🍫",
         "prezzo": "1g 15€ 5g 70€",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1787327235/12_kv8vfb.mp4"
-     },
-    "8": {
-        "nome": "🍫FROZEN PINK LIMEZ🍫",
-        "prezzo": "1g 15€",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1783345401/6_vv51kk.mp4"
     }
 }
 
