@@ -23,7 +23,7 @@ PRODOTTI = {
      },
     "2": {
         "nome": "🇨🇦CONYZA CANADENSIS🇨🇦",
-        "prezzo": "0.90g 10€ 5g 45€ CORRISPONDENZA LETTERA(C)",
+        "prezzo": "0.90g 10€ CORRISPONDENZA LETTERA(C)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1785950481/14_mqaclc.mp4"
      },
     "3": {
@@ -42,8 +42,8 @@ PRODOTTI = {
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1779706002/5_tvcxfq.mp4"
      },
     "6": {
-        "nome": "🍫DRY GREEN BOYS FARM🍫 (🍉WATER MELON🍉)",
-        "prezzo": "1g 10€ 5g 35€ CORRISPONDENZA LETTERA(W.M)",
+        "nome": "🍫DRY SIFT🍫 (🍹SPRITZER🍹)",
+        "prezzo": "1g 10€ 5g 35€ CORRISPONDENZA LETTERA(S)",
         "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788400623/14_jka7uy.mp4"
      },
     "7": {
