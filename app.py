@@ -44,7 +44,7 @@ PRODOTTI = {
     "6": {
         "nome": "🍫DRY SIFT🍫 (🍹SPRITZER🍹)",
         "prezzo": "1g 10€ 5g 35€ CORRISPONDENZA LETTERA(S)",
-        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1788400623/14_jka7uy.mp4"
+        "video_url": "https://res.cloudinary.com/dg1axjftz/video/upload/v1790165372/9_qo0waz.mp4"
      },
     "7": {
         "nome": "🍫DRY SIFT ILLUMINATY FARM🍫 (🍪TROPICANA COOKIES🍪)",
